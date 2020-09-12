@@ -10,7 +10,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{Andrew Wu}
+\lhead{UNSW Business School}
 \rhead{ACTL3182 Cheatsheet}
 \cfoot{Page \thepage}  %PERHAPS Add UNSW COPYRIGHT FOOTER
 \setlength{\headheight}{17pt} 
@@ -27,9 +27,11 @@
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\PR}{\mathbb{P}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\Cov}{\operatorname{Cov}}
 
 \begin{document}
 	\maketitle
+	\textbf{NOTE:} Theory sections are written to simplify the text for easy revision. You may need to provide more information than what is written here for exam questions.
 	\section{Modern Portfolio Theory}
 	\subsection{Utility Theory}
 	\subsubsection{Expected Utility Theorem}
@@ -73,11 +75,11 @@
 	A function \( \mathcal{\theta}: X\to\R\) that summarises an investment's risk with a single number.
 	\subsubsection{Common Examples}
 	\begin{enumerate}
-		\item \textbf{Variance:} \( \int_{-\infty}^{\infty} (x - \mu)^2 f_{X}(x)dx \)
-		\item \textbf{Downside-Variance:} \( \int_{-\infty}^{\mu} (x - \mu)^2 f_{X}(x)dx \)
-		\item \textbf{Shortfall Probability:} \( \PR(X \leq L ) \)
-		\item \textbf{Expected Shortfall:} \( \int_{-\infty}^{L}(L-x)f_{X}(x)dx \)
-		\item \textbf{Shortfall Variance:} \( \int_{-\infty}^{L}(L-x)^2  f_{X}(x)dx \)
+		\item Variance: \( \int_{-\infty}^{\infty} (x - \mu)^2 f_{X}(x)dx \)
+		\item Downside-Variance: \( \int_{-\infty}^{\mu} (x - \mu)^2 f_{X}(x)dx \)
+		\item Shortfall Probability: \( \PR(X \leq L ) \)
+		\item Expected Shortfall: \( \int_{-\infty}^{L}(L-x)f_{X}(x)dx \)
+		\item Shortfall Variance: \( \int_{-\infty}^{L}(L-x)^2  f_{X}(x)dx \)
 	\end{enumerate}
 	\subsubsection{Value-at-Risk:}
 	The Value-at-risk \textbf{at level }\( \bm{\alpha} \) is the maximum possible loss from holding a portfolio over a \textbf{given time period} so that the \textbf{probability of larger loss is} \(\bm{1 - \alpha}  \).\\
@@ -90,12 +92,119 @@
 		\).
 	\subsection{Portfolio Optimisation}
 	\subsubsection{Two assets}
-	\[	w_A = \frac{\sigma^2_B - \sigma_{AB}}{\sigma^2_A + \sigma^2_B - 2\sigma_{AB}},\quad w_B = 1 - w_A\]
+	MVP: \[	w_A = \frac{\sigma^2_B - \sigma_{AB}}{\sigma^2_A + \sigma^2_B - 2\sigma_{AB}},\quad w_B = 1 - w_A\]
+	Portfolio Variance:
 	\[	\sigma_P^2 = w_A^2 \sigma_A^2 + w_B^2 \sigma_B^2 + 2w_A w_B\rho_{AB}\sigma_{A}\sigma_B\]
+	
 	\subsubsection{N-risky assets}
+	Minimise \( \displaystyle\sigma_P^2 = \bm{w}^{\top} \Sigma \bm{w} \), \( \quad \)subject to \( \bm{1}^{\top}\bm{w}= 1 \) and \( \bm{z}^{\top}\bm{w}=\mu \).\\[5pt]
+	Lagrangian: \( \mathcal{L}(\bm{w}, \lambda, \gamma)  = \frac{1}{2} \bm{w}^{\top} \Sigma \bm{w} + \lambda (1 - \bm{1}^{\top}\bm{w}) + \gamma (\mu - \bm{z}^{\top}\bm{w})\).\\[5pt]
+	Constants: \( A = \bm{1}^{\top}\Sigma^{-1}\bm{1},\quad B =  \bm{1}^{\top}\Sigma^{-1}\bm{z} = \bm{z}^{\top}\Sigma^{-1}\bm{1}, \quad C = \bm{z}^{\top}\Sigma^{-1}\bm{z}, \quad\Delta = AC - B^2\)\\[5pt]
+	MVP: \( \displaystyle\bm{w} = \lambda \Sigma^{-1} \bm{1} + \gamma \Sigma^{-1}\bm{z}  \), where \( \lambda = \frac{C - \mu B}{\Delta}, \gamma = \frac{\mu A - B}{\Delta} \)\\[5pt]
+	Portfolio Variance: \( \sigma_P^2 = \frac{A\mu^2 -2B\mu + C}{\Delta} \)\\[5pt]
+	Global MVP: \( \bm{w}_g = \frac{1}{A}\Sigma^{-1}\bm{1} \).
 	
 	\subsubsection{N-risky assets + risk-free}
+	Minimise \( \sigma_P^2 = \bm{w}^{\top} \Sigma \bm{w} \), \( \quad \)subject to \( (\bm{z} - r_{f}\bm{1})^{\top}\bm{w} = u - r_f \).\\[5pt]
+	Lagrangian: \( \mathcal{L}(\bm{w}, \lambda, \gamma)  = \frac{1}{2}\bm{w}^{\top}\Sigma\bm{w} + \gamma(\mu - r_f - (\bm{z} - r_f \bm{1})^{\top}\bm{w}) \)\\[5pt]
+	MVP: \( \bm{w} = \gamma\Sigma^{-1}(\bm{z} - r_f \bm{1}) \), where \( \gamma = \frac{\mu - r_f}{A r_f^2 -2B r_f + C} \)\\[5pt]
+	Portfolio Variance: \( \sigma_P^2 = \frac{(\mu - r_f)^2}{A r_f^2 -2B r_f + C} \)\\[5pt]
+	Tangency Portfolio: \( \bm{w}_t = \gamma_t \Sigma^{-1}(\bm{z} - r_f \bm{1}) \), where \( \gamma_t = \frac{1}{B - Ar_f} \)
+	\subsubsection{Two Fund Theorem (N-risky assets)}
+	All efficient portfolios are a linear combination of any two efficient portfolios. 
+	\subsubsection{One Fund Theorem (N-risk + risk-free)}
+	All efficient portfolios are a linear combination of the tangent portfolio and the risk-free asset.
 	\section{Asset Pricing Models}
+	\subsection{CAPM}
+	\subsection{CAPM Assumptions}
+	\begin{enumerate}
+		\item Investors choose optimal portfolios based only on mean and variance of returns. Justified if returns are normally distributed returns or utility functions are quadratic.
+		\item Homogeneity: Investors agree on distribution of returns and plan over a single common period.
+		\item No Market Frictions (eg. taxes, short-selling restrictions, restricted information)
+		\item Investors can borrow or lend at the risk-free rate.
+		\item Market Portfolio consists of all publicly traded assets.
+	\end{enumerate}
+	\subsubsection{Capital Market Line}
+	%The line representing all efficient portfolios when there are \( N \)-risky assets and a risk-free asset.
+	\[	u_{e} = r_{f} + \frac{\sigma_{e}}{\sigma_{M}}(\mu_{M} - r_{f})\]
+	%where \( {}_{e}, {}_{M} \) denote the efficient and Market Portfolios respectively.
+	\subsubsection{Security Market Line}
+	
+	\[	\mu_i = r_f + \beta_i (\mu_M - r_f)\]
+	\subsubsection{Risk Decomposition}
+	\begin{align*}
+		\sigma_i^2 & = \beta_i^2 \sigma_M^2 + \sigma_{\xi_{i}}^2 \\
+		& = \text{Systematic Risk} + \text{Non-systematic Risk}
+	\end{align*}	
+	\subsection{Factor Models}
+	\subsubsection{Single Factor Model (SFM)}
+	\[	r_i = \alpha_i + \beta_i f + \epsilon_i, \]
+	where \( \alpha_i, \beta_i \) are stock-specific constants, \( f \) is the factor capturing market-wide price movement and \( \epsilon_i \) is a noise term reflecting firm-specific risk.
+	\subsubsection{SFM Assumptions}
+	\begin{enumerate}
+		\item \( (r_i, f) \) are jointly normal
+		\item \( \epsilon_i\sim\mathcal{N}(0, \sigma_{\epsilon_i}^2) \)
+		\item \( \Cov(\epsilon_i, f) = 0 \)
+		\item \( \Cov(\epsilon_i, \epsilon_j) = 0 \) for \( i\neq j \)
+	\end{enumerate}
+	\subsubsection{Risk Decomposition and Covariance}
+	\begin{align*}
+	& \sigma_i^2 = \beta_i^2 \sigma_f^2 + \sigma_{\epsilon_{i}}^2 = \text{Systematic Risk} + \text{Non-systematic Risk}\\
+	& \sigma_{i, j} = \beta_i \beta_j \sigma_f^2
+	\end{align*}
+	\subsubsection{Diversification}	
+	\[	R_P^2 = \frac{\beta_P^2 \sigma_f^2}{\sigma_P^2} = \frac{\text{Systematic Risk}}{\text{Total Risk}}\]
+	Full diversification when \( R_P^2 = 1 \).
+	\subsubsection{Multi-Factor Models}
+	\[	r_i = \alpha_i + \beta_{i, 1}f_1 + \beta_{i, 2}f_2 + ... + \beta_{i, K} f_K + \epsilon_i \]
+	Factors \( f_i \) may include inflation, economic growth, interest rates etc.
+	\subsection{APT}
+	\subsubsection{Assumptions}
+	Replace rigid CAPM assumptions with more relaxed assumptions:
+	\begin{enumerate}
+		\item No Arbitrage in the market
+		\item Large universe of securities
+		\item Returns follow a factor model
+	\end{enumerate}
+	\subsubsection{Single-Factor APT Assumptions}
+	Assume returns follow the following factor model:
+		\[	r_i = \alpha_i + \beta_{i}I+\epsilon_{i}\]
+	Define the standardised factor \( f:=(I - \mu_{I})/\sigma_{I} \) (\( \sim\mathcal{N}(0,1) \)) and assume:
+	\begin{enumerate}
+		\item \( \E[\epsilon_i] = 0 \)
+		\item \( \Cov(\epsilon_i, \epsilon_j) = 0\) if \( i\neq j \)
+		\item \( \Cov(\epsilon_i, I) = 0\)
+		\item Unlimited short-selling
+	\end{enumerate}
+	\subsubsection{Single-Factor APT Returns}
+	\begin{align*}
+		& r_i = a_i + b_i f + \epsilon_i\\[5pt]
+		& \E[r_i] = a_i,\quad \sigma_i^2 = b_i^2 + \sigma_{\epsilon_i}^2,\quad\sigma_{i, j} = b_{i}b_{j}
+	\end{align*}
+	Under no-arbitrage, 
+	\[	a_i = \lambda_0 + \lambda_1 b_i,\]
+	where \( \lambda_0 = r_f \) if there is a risk-free asset.
+	\subsubsection{Multi-Factor APT Returns}
+	\[	r_i = a_i + b_{i,1 }f_1 + b_{i,2} f_2 + ... + b_{i, K}f_K + \epsilon_i\]
+	where
+	\[	\E[r_i] = a_i = \lambda_0 + \lambda_1 b_{i,1} + \lambda_2 b_{i, 2} + ... + \lambda_K b_{i, K}\]
+	and \( \lambda_0 = r_f \) if there is a risk-free asset.
+	\subsection{Model Fitting and Market Efficiency}
+	\subsubsection{Estimating returns}
+	Using historical data to estimate mean return is not feasible: over 100 years of data would be needed to get a reliable estimate.
+	\subsubsection{Investment approaches}
+	\begin{enumerate}
+		\item Technical analysis: Analyse historical data (price and volume).
+		\item Fundamental analysis: Measure intrinsic value of stocks and compare with market price.
+		\item Efficient market selection: Define acceptable risk level and form broad portfolio.
+	\end{enumerate}
+	\subsubsection{Types of market efficiency}
+	\begin{enumerate}
+		\item Strong form: Market prices reflect all information including insider information.
+		\item Semi-strong form: Market prices reflect all publicly available information %(fundamental and technical analysis are useless).
+		\item Weak form: Market prices reflect all historical data 
+		%(technical analysis is useless).
+	\end{enumerate}
 	\section{Discrete Time Derivative Pricing}
 	\section{Continuous Time Derivative Pricing}
 	\section{Term Structure Modelling and Asset-Liability Management}
