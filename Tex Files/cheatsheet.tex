@@ -22,15 +22,79 @@
 \usepackage{titlesec}
 \titleformat{\section}{\Large\sffamily\bfseries\color{red}}{\thesection}{0.5em}{}[]
 \titleformat{\subsection}{\color{red!75}\large\sffamily\bfseries}{\thesubsection}{0.5em}{}
-\titleformat{\subsubsection}{\color{red!25}\normalsize\sffamily\bfseries}{\thesubsubsection}{0.5em}{}
+\titleformat{\subsubsection}{\color{red!50}\normalsize\sffamily\bfseries}{\thesubsubsection}{0.5em}{}
 
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\PR}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
 
 \begin{document}
 	\maketitle
 	\section{Modern Portfolio Theory}
 	\subsection{Utility Theory}
-	
+	\subsubsection{Expected Utility Theorem}
+	Individual prefers \( W_1 \) over \( W_2 \) iff \( \E[u(W_1)] \geq \E[u(W_2)] \)
+	\subsubsection{Utility Axioms}
+	The expected utility theorem is a consequence of the following axioms:
+	\begin{enumerate}
+		\item \textbf{Completeness (Comparability):} For all decisions \( A,B \), either \( A \prec B \), \( A\succ B \) or \( A\sim B \)
+		\item \textbf{Transitivity:} If \( A\succ B \) and \( B\succ C \), then \( A\succ C \)
+		\item \textbf{Independence:} If \( A\succ B \) then for any \( C \), 
+		\[	G(A,C;\alpha) \sim G(B, C; \alpha)\]
+		\item \textbf{Measurability:} If \( A\succ B\succ C \), there exists a unique \( \alpha \) such that
+		\[ B\sim G(A, C;\alpha)	\]
+		\item \textbf{Ranking:} Suppose \( A\succ B\succ D \), \( A\succ C\succ D \), \( B\sim G(A, D;\alpha_1) \) and \( C\sim G(A, D; \alpha_2) \). Then, if \( \alpha_1\geq\alpha_2 \), then \( B\succ D \).
+		\item \textbf{Certainty Equivalent:} All gambles have a price.
+	\end{enumerate}
+	\subsubsection{Non-Satiation}
+	Individuals always prefer more wealth to less: \( u'(w) > 0 \).
+	\subsubsection{Investor types}
+	\begin{tabular}{lcccc}
+		\hline
+		\hline
+		\textbf{Type} & \textbf{Wealth Preference} & \textbf{Utility Preference} & $\bm{U''}$ & \textbf{Concavity}\\
+		\hline
+		Risk-Averse & \( \E[W] \succ W \) & \( U(\E[W]) > E[U(W)] \) & \( U'' < 0 \) & concave\\
+		\hline
+		Risk-Neutral & \( \E[W] \sim W \) & \( U(\E[W]) = E[U(W)] \) & \( U'' = 0 \) & linear\\
+		\hline
+		Risk-Lover &\( \E[W] \prec W \) & \( U(\E[W]) < E[U(W)] \) & \( U'' > 0 \) & convex\\
+		\hline
+		\end{tabular}
+	\subsubsection{Risk Premium}
+	The amount \( \pi(W) \) that an individual will pay to give up risk:
+		\[	\pi(W) = \E[W] - c(W)\]
+	where \( c(W) := U^{-1}(\E[U(W)]) \) is the \textbf{certainty wealth equivalent}.
+	\subsubsection{Risk Aversion}
+	Absolute risk aversion \( A(w) \) and relative risk aversion \( R(w) \)
+	\[	A(w) = -\frac{U''(w)}{U'(w)},\quad R(w) = -w\frac{U''(w)}{U'(w)}.\] 
+	\subsection{Investment Risk Measures}
+	\subsubsection{Definition}
+	A function \( \mathcal{\theta}: X\to\R\) that summarises an investment's risk with a single number.
+	\subsubsection{Common Examples}
+	\begin{enumerate}
+		\item \textbf{Variance:} \( \int_{-\infty}^{\infty} (x - \mu)^2 f_{X}(x)dx \)
+		\item \textbf{Downside-Variance:} \( \int_{-\infty}^{\mu} (x - \mu)^2 f_{X}(x)dx \)
+		\item \textbf{Shortfall Probability:} \( \PR(X \leq L ) \)
+		\item \textbf{Expected Shortfall:} \( \int_{-\infty}^{L}(L-x)f_{X}(x)dx \)
+		\item \textbf{Shortfall Variance:} \( \int_{-\infty}^{L}(L-x)^2  f_{X}(x)dx \)
+	\end{enumerate}
+	\subsubsection{Value-at-Risk:}
+	The Value-at-risk \textbf{at level }\( \bm{\alpha} \) is the maximum possible loss from holding a portfolio over a \textbf{given time period} so that the \textbf{probability of larger loss is} \(\bm{1 - \alpha}  \).\\
+	In general, 
+	\[	\text{VaR}(\alpha) = \mu - X_{1 - \alpha},
+		\]
+	where \( X_{1-\alpha} \) is the \( 1 - \alpha \)-quantile of X.
+	If \( X\sim\mathcal{N}(\mu, \sigma^2) \), then 
+	\(	\text{VaR}(\alpha) = \sigma Z_{\alpha}
+		\).
 	\subsection{Portfolio Optimisation}
+	\subsubsection{Two assets}
+	\[	w_A = \frac{\sigma^2_B - \sigma_{AB}}{\sigma^2_A + \sigma^2_B - 2\sigma_{AB}},\quad w_B = 1 - w_A\]
+	\[	\sigma_P^2 = w_A^2 \sigma_A^2 + w_B^2 \sigma_B^2 + 2w_A w_B\rho_{AB}\sigma_{A}\sigma_B\]
+	\subsubsection{N-risky assets}
+	
+	\subsubsection{N-risky assets + risk-free}
 	\section{Asset Pricing Models}
 	\section{Discrete Time Derivative Pricing}
 	\section{Continuous Time Derivative Pricing}
