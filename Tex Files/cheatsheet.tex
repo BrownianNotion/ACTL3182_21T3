@@ -380,59 +380,217 @@
 		\]
 	\subsection{Discrete Time Pricing}
 	\subsubsection{One Period Binomial Model}
-	Let \( s_u, s_d \) be the value of the stock in one period \( \delta t \) if the price goes up/down and likewise let \( f_u, f_d \) be the payoff the derivative. Let \( X \) be the payoff of the derivative at maturity.\\
-		\resizebox{0.3\linewidth}{5cm}{
+	%Let \( s_u, s_d \) be the value of the stock in one period \( \delta t \) if the price goes up/down and likewise let \( f_u, f_d \) be the payoff the derivative. Let \( X \) be the payoff of the derivative at maturity.
+	\begin{center}
+		\resizebox{3.5cm}{4cm}{
 			\begin{tikzpicture}
-				\tikzstyle{every node}=[font=\tiny];
+				%\tikzstyle{every node}=[font=\small];
 				
 				%Level 1
 				\filldraw[fill=black] (0, 0) circle(1pt);
-				\node[left] at (0, 0) {\( s_0 \)};
+				\node[left] at (0, 0) {\( s_1 \)};
 				
 				%Lines
 				\draw[-latex] (0, 0) -- (2, 1.3) ;
 				\draw[-latex] (0, 0) -- (2, -1.3);
 				
 				%Level 2
-				\node[above right] at (1.9, 1.2) {\( s_u \)};
-				\node[below right] at (1.9, -1.2) { \( s_d \)};
-
+				\node[above right] at (1.9, 1.2) {\( s_3 \)};
+				\node[below right] at (1.9, -1.2) { \( s_2 \)};
+				
+				%Title
+				\node[above, font = \small\bfseries] at (current bounding box.north) {Stock};
 			\end{tikzpicture}
 		}
-		\qquad\qquad
-		\resizebox{0.3\linewidth}{5cm}{
+		\hspace{2cm}
+		\resizebox{3.5cm}{4cm}{
 			\begin{tikzpicture}
-			\tikzstyle{every node}=[font=\tiny];
-			
-			%Level 1
-			\filldraw[fill=black] (0, 0) circle(1pt);
-			\node[left] at (0, 0) {\( f_0 \)};
-			
-			%Lines
-			\draw[-latex] (0, 0) -- (1, 0.75) ;
-			\draw[-latex] (0, 0) -- (1, -0.75);
-			
-			%Level 2
-			\node[above right] at (0.9, 0.65) {\( f_u \)};
-			\node[below right] at (0.9, -0.65) { \( f_d \)};
+				%\tikzstyle{every node}=[font=\small];
+				
+				%Level 1
+				\filldraw[fill=black] (0, 0) circle(1pt);
+				\node[left] at (0, 0) {\( f_1 \)};
+				
+				%Lines
+				\draw[-latex] (0, 0) -- (2, 1.3) ;
+				\draw[-latex] (0, 0) -- (2, -1.3);
+				
+				%Level 2
+				\node[above right] at (1.9, 1.2) {\( f_3 \)};
+				\node[below right] at (1.9, -1.2) { \( f_2 \)};
+				
+				%Title
+				\node[above, font = \small\bfseries] at (current bounding box.north) {Derivative};
 			\end{tikzpicture}
-		}\\
+		}
+		\end{center}
 	The replicating portfolio (stocks, bonds) is:
-	\[	\phi = \frac{f_u - f_d}{s_u - s_d},\quad \psi = \frac{1}{B(0)}e^{-r\delta t}(f_u - \phi s_u)\]
+	\[	\phi = \frac{f_3 - f_2}{s_3 - s_2},\quad \psi = \frac{1}{B(0)}e^{-r\delta t}(f_3 - \phi s_3)\]
 	The derivative price today is:
-	\[	V_0 = \phi s_0 + \psi_0 B(0)
+	\[	V_0 = \phi s_1 + \psi B(0)
 		\]
-	Rewritten using risk-neutral probabilities,
-	\[	V_0 = e^{-r\delta t}(q f_u + (1 - q) f_d) = e^{-r\delta t}\E^{\Q}[X] 
+	Rewriting with risk-neutral probabilities:
+	\[	V_0 = e^{-r\delta t}(q f_3 + (1 - q) f_2) = e^{-r\delta t}\E^{\Q}[X] 
 		\]
-	where \[ \displaystyle q = \frac{s_0 e^{-r\delta t} - s_d}{s_u - s_d}. \]
+	where \[ \displaystyle q = \frac{s_1 e^{r\delta t} - s_2}{s_3 - s_2}. \]
 	\subsubsection{Multi-Period Binomial Model}
-	
+	Apply the one-period Binomial model to each internal node and recurse work backwards to find price.\\As an example, below is the two-period binomial model price:
+	\begin{center}
+		\resizebox{5cm}{5.5cm}{
+			\begin{tikzpicture}
+				%\tikzstyle{every node}=[font=\small];
+				
+				%Title
+				%\node[above, font = \small\bfseries] at (current bounding box.north) {Stock};
+				
+				%Level 1
+				\filldraw[fill=black] (0, 0) circle(2pt);
+				\node[left] at (0, 0) {\( s_1 \)};
+				
+				%Lines
+				\draw[-latex] (0, 0) -- (2, 1.5);
+				\draw[-latex] (0, 0) -- (2, -1.5);
+				
+				%Level 2
+				\node[above] at (1.9, 1.4) {\( s_3 \)};
+				\node[below] at (1.9, -1.4) { \( s_2 \)};
+				
+				%Lines
+				\draw[-latex] (2, 1.5) -- (4, 2.25);
+				\draw[-latex] (2, 1.5) -- (4, 0.75);
+				\draw[-latex] (2, -1.5) -- (4, -0.75);
+				\draw[-latex] (2, -1.5) -- (4, -2.25);
+				
+				%Level 3
+				\node[right] at (4, 2.25) {\( s_7 \)};
+				\node[right] at (4, 0.75) {\( s_6 \)};
+				\node[right] at (4, -0.75) {\( s_5 \)};
+				\node[right] at (4, -2.25) {\( s_4 \)};
+				
+				%Title
+				\node[above, font = \small\bfseries] at (current bounding box.north) {Stock};
+			\end{tikzpicture}
+		}
+	\hspace{2cm}
+		\resizebox{5cm}{5.5cm}{
+			\begin{tikzpicture}
+				%\tikzstyle{every node}=[font=\small];
+				
+				%Title
+				%\node[above, font = \small\bfseries] at (current bounding box.north) {Stock};
+				
+				%Level 1
+				\filldraw[fill=black] (0, 0) circle(2pt);
+				\node[left] at (0, 0) {\( f_1 \)};
+				
+				%Lines
+				\draw[-latex] (0, 0) -- (2, 1.5);
+				\draw[-latex] (0, 0) -- (2, -1.5);
+				
+				%Level 2
+				\node[above] at (1.9, 1.4) {\( f_3 \)};
+				\node[below] at (1.9, -1.4) { \( f_2 \)};
+				
+				%Lines
+				\draw[-latex] (2, 1.5) -- (4, 2.25);
+				\draw[-latex] (2, 1.5) -- (4, 0.75);
+				\draw[-latex] (2, -1.5) -- (4, -0.75);
+				\draw[-latex] (2, -1.5) -- (4, -2.25);
+				
+				%Level 3
+				\node[right] at (4, 2.25) {\( f_7 \)};
+				\node[right] at (4, 0.75) {\( f_6 \)};
+				\node[right] at (4, -0.75) {\( f_5 \)};
+				\node[right] at (4, -2.25) {\( f_4 \)};
+				
+				%Risk Neutral probabilities.
+				\node[red!75, above] at (1, 0.8) {\( q_1 \)};
+				\node[red!75, above] at (3, -1.1) {\( q_2 \)};
+				\node[red!75, above] at (3, 1.9) {\( q_3 \)};
+				%Title
+				\node[above, font = \small\bfseries] at (current bounding box.north) {Derivative};
+			\end{tikzpicture}
+		}
+		\end{center}
+	For \( j = 1,2,3 \):
+	\[	q_j = \frac{s_{j}e^{r\delta t} - s_{2j}}{s_{2j+1} - s_{2j}}, \quad
+		f_{j} = e^{-r\delta t}\left[q_{j} f_{2j+1} + (1-q_{j})f_{2j}\right]
+			\]
+	Substituting \( f_2, f_3 \) into \( f_1 \),
+	\[	f_1 = e^{-2\delta t}\left[q_1q_3 f_7 + q_1 (1- q_3) f_6 + 
+								  (1-q_1) q_2 f_5 + (1 - q_1)(1-q_2) f_4\right]
+		\]
+	\subsubsection{Risk-Neutral Probabilities}
+	\begin{itemize}
+		\item Under risk neutral world, \( \text{price} = \text{discounted expected value of payoff} \).
+		\item Risk preference of investor no longer needs to be considered.
+		\item The real world probabilities of the stock going up or down are no longer needed for pricing.
+		\end{itemize}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Continuous Time Derivative Pricing}
-	\subsection{Meausre Theory}
+	\subsection{Measure Theory}
+	\subsubsection{Equivalent Probability Measures}
+	Measures \( \PR \) and \( \Q \) are equivalent iff for all events \( A \), \(\qquad \PR(A)>0\quad\text{iff}\quad\Q(A)>0 \).
+	\subsubsection{Radon-Nikodym Derivative}
+	The Radon-Nikodym Derivative (denoted by \( \zeta \) or \( \frac{d\Q}{d\PR} \)) is a function that allows the interchange between equivalent probability measures. If \( \PR \) and \( \Q \) are equivalent, then for all events \( A \):
+	\[	\Q(A) = \E^{\Q}[1_{A}] = \E^{\PR}\left[\zeta\cdot 1_{A}\right]
+		\]
 	\subsection{Stochastic Processes}
+	%Some concepts in this section are very advanced. For rigorous mathematical definitions, see my FINS4781 notes.
+	\subsubsection{Definition}
+	A stochastic process is a set of random variables \( \{X(t) : t\in \mathcal{I}\} \) where \( \mathcal{I} \) is a usually a time-interval (eg. \( [0, T] \)). Usually, we refer to the process as \( X(t) \) for short.
+	\subsubsection{Filtration}
+	A filtration \( \mathcal{F}_t \) contains the history of the stochastic process \( X(t) \) up to time \( t \).
+	\subsubsection{Martingale}
+	A stochastic process \( M(t) \) is a martingale iff for \( s\leq t \),
+	\[	\E[M(t) | \mathcal{F}_s] = M(s)\]
+	\subsubsection{Brownian Motion}
+	A stochastic process \( W(t) \) is a \( \PR \)-Wiener Process (Brownian Motion) iff under measure \( \PR \):
+	\begin{enumerate}
+		\item \( W_0 = 0 \) almost surely
+		\item \( W(t) \) is continuous almost surely
+		\item \( W(t) - W(s) \sim\mathcal{N}(0, t-s) \)
+		\item \( W(t) - W(s) \) is independent of \( \mathcal{F}_s \)
+	\end{enumerate}
 	\subsection{Stochastic Calculus} 
+	\subsubsection{Stochastic Differential Equation}
+	Suppose the stochastic process \( X(t) \) can be written as
+	\[	X(t) = x_0 + \int_{0}^{t} a(s) ds + \int_{0}^{t} b(s) dW(s)\]
+	where \( a(\cdot), b(\cdot) \) are appropriate functions (possibly stochastic processes) and \( x_0 \) is a constant.\\
+	This is abbreviated as
+	\[	dX(t) = a(t) dt + b(t) dW(t), \qquad X(0) = x_0.\]
+	\subsubsection{It\^{o}'s Lemma}
+	It\^{o}'s Lemma tells us how to differentiate functions of stochastic processes.
+	%just as the chain rule tells us how to differentiate functions of deterministic functions. 
+	\\\\Let \( f(x), F(t, x) \) be deterministic functions with continuous (partial) derivatives up to the second order. Then, 
+	\begin{align*}
+		& df(X(t)) = f'(X_t) dt + \frac{1}{2}f''(X(t)) dX(t)^2 \\
+		& dF(t, X(t)) = \frac{\partial F}{\partial t}dt + \frac{\partial F}{\partial x}(t, X(t)) dX(t) + \frac{1}{2}\frac{\partial^2 F}{\partial x^2}(t, X(t)) dX(t)^2
+	\end{align*}
+	These equations can be simplified using the following multiplication table:
+	\begin{center}
+		\begin{tabular}{ccc}
+			\( \times \) & \( dt \) & \( dW(t) \)\\
+			\hline
+			\hline
+			\( dt \) & 0 & 0 \\
+			\hline
+			\( dW(t) \) & 0 & dt \\
+			\hline
+			\end{tabular}
+		\end{center}
+	\subsubsection{Radon-Nikodym Derivative}
+	For stochastic processes, the Radon-Nikodym Derivative becomes a stochastic process \( \zeta_t \) (specifically, a martingale). For all events \( A\in\mathcal{F}_t \),
+	\[	\Q(A) = \E^{\Q}[1_{A}] = \E^{\PR}[\zeta_t \cdot1_{A}]\]
+	\subsubsection{Girsanov-Theorem}
+	Girsanov's Theorem will help us obtain the stochastic differential equation for a stock under a different measure.\\\\
+	Suppose \( W(t) \) is a \( \PR \)-Brownian Motion and \( \gamma(\cdot) \) is a pre-visible process. Then there exists an equivalent measure \( \Q \) with Radon-Nikodym derivative 
+	\[	\zeta_t = \exp\left[-\int_{0}^{t}\gamma(s)dW(s) - \int_{0}^{t}\gamma(s)^2 ds\right]
+		\]
+	such that \( W^{Q} \), where
+	\[	W^{\Q}(t) = W(t) - \int_{0}^{t} \gamma(s)ds,\]
+	is a \( \Q \)-Brownian Motion.
+	\subsubsection{}
 	\subsection{Black-Scholes-Merton Model}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Term Structure Modelling and Asset-Liability Management}
