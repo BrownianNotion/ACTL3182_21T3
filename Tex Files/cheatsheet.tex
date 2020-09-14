@@ -7,6 +7,7 @@
 \usepackage{amsmath}
 \usepackage{xcolor}
 \usepackage{tikz}
+\usepackage[colorlinks = true]{hyperref}
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -33,11 +34,11 @@
 
 \begin{document}
 	\maketitle
-	\textbf{NOTE:} Theory sections are written to simplify the text for easy revision. You may need to provide more information than what is written here for exam questions.
+	\textbf{NOTE:} Theory sections are written to simplify the text for easy revision. Yours answers to exam questions may need to be more detailed than what is written here. This cheatsheet may be revised throughout the term, please check \url{https://github.com/BrownianNotion/ACTL3182_20T3.git} for the latest version.
 	\section{Modern Portfolio Theory}
 	\subsection{Utility Theory}
 	\subsubsection{Expected Utility Theorem}
-	Individual prefers \( W_1 \) over \( W_2 \) iff \( \E[u(W_1)] \geq \E[u(W_2)] \)
+	Individual prefers \( W_1 \) over \( W_2 \) iff \( \E[U(W_1)] \geq \E[U(W_2)] \)
 	\subsubsection{Utility Axioms}
 	The expected utility theorem is a consequence of the following axioms:
 	\begin{enumerate}
@@ -51,7 +52,7 @@
 		\item \textbf{Certainty Equivalent:} All gambles have a price.
 	\end{enumerate}
 	\subsubsection{Non-Satiation}
-	Individuals always prefer more wealth to less: \( u'(w) > 0 \).
+	Individuals always prefer more wealth to less: \( U'(w) > 0 \).
 	\subsubsection{Investor types}
 	\begin{center}
 		\def\arraystretch{1.25}
@@ -97,28 +98,38 @@
 		\).
 	\subsection{Portfolio Optimisation}
 	\subsubsection{Two assets}
-	MVP: \[	w_A = \frac{\sigma^2_B - \sigma_{AB}}{\sigma^2_A + \sigma^2_B - 2\sigma_{AB}},\quad w_B = 1 - w_A\]
+	Minimum Variance Portfolio: \[	w_A = \frac{\sigma^2_B - \sigma_{AB}}{\sigma^2_A + \sigma^2_B - 2\sigma_{AB}},\quad w_B = 1 - w_A\]
 	Portfolio Variance:
 	\[	\sigma_P^2 = w_A^2 \sigma_A^2 + w_B^2 \sigma_B^2 + 2w_A w_B\rho_{AB}\sigma_{A}\sigma_B\]
 	
 	\subsubsection{N-risky assets}
 	Minimise \( \displaystyle\sigma_P^2 = \bm{w}^{\top} \Sigma \bm{w} \), \( \quad \)subject to \( \bm{1}^{\top}\bm{w}= 1 \) and \( \bm{z}^{\top}\bm{w}=\mu \).\\[5pt]
-	Lagrangian: \( \mathcal{L}(\bm{w}, \lambda, \gamma)  = \frac{1}{2} \bm{w}^{\top} \Sigma \bm{w} + \lambda (1 - \bm{1}^{\top}\bm{w}) + \gamma (\mu - \bm{z}^{\top}\bm{w})\).\\[5pt]
-	Constants: \( A = \bm{1}^{\top}\Sigma^{-1}\bm{1},\quad B =  \bm{1}^{\top}\Sigma^{-1}\bm{z} = \bm{z}^{\top}\Sigma^{-1}\bm{1}, \quad C = \bm{z}^{\top}\Sigma^{-1}\bm{z}, \quad\Delta = AC - B^2\)\\[5pt]
-	MVP: \( \displaystyle\bm{w} = \lambda \Sigma^{-1} \bm{1} + \gamma \Sigma^{-1}\bm{z}  \), where \( \lambda = \frac{C - \mu B}{\Delta}, \gamma = \frac{\mu A - B}{\Delta} \)\\[5pt]
-	Portfolio Variance: \( \sigma_P^2 = \frac{A\mu^2 -2B\mu + C}{\Delta} \)\\[5pt]
-	Global MVP: \( \bm{w}_g = \frac{1}{A}\Sigma^{-1}\bm{1} \).
+	Lagrangian: \( \mathcal{L}(\bm{w}, \lambda, \gamma)  = \frac{1}{2} \bm{w}^{\top} \Sigma \bm{w} + \lambda (1 - \bm{1}^{\top}\bm{w}) + \gamma (\mu - \bm{z}^{\top}\bm{w})\)\\\\
+	Constants: \begin{align*}
+				&	A = \bm{1}^{\top}\Sigma^{-1}\bm{1},\quad B =  \bm{1}^{\top}\Sigma^{-1}\bm{z} = \bm{z}^{\top}\Sigma^{-1}\bm{1}\\[2pt]
+				&	C = \bm{z}^{\top}\Sigma^{-1}\bm{z}, \quad\Delta = AC - B^2\\
+				\end{align*} 
+	%\\[5pt]
+	Minimum Variance Portfolio: 
+	\[ \displaystyle\bm{w} = \lambda \Sigma^{-1} \bm{1} + \gamma \Sigma^{-1}\bm{z}  \]where \[ \lambda = \frac{C - \mu B}{\Delta}, \quad\gamma = \frac{\mu A - B}{\Delta} \]\\\\
+	%\\[5pt]
+	Portfolio Variance: \[ \sigma_P^2 = \frac{A\mu^2 -2B\mu + C}{\Delta} \]\\
+	Global Minimum Variance Portfolio: \[ \bm{w}_g = \frac{1}{A}\Sigma^{-1}\bm{1} \]
 	
 	\subsubsection{N-risky assets + risk-free}
 	Minimise \( \sigma_P^2 = \bm{w}^{\top} \Sigma \bm{w} \), \( \quad \)subject to \( (\bm{z} - r_{f}\bm{1})^{\top}\bm{w} = u - r_f \).\\[5pt]
-	Lagrangian: \( \mathcal{L}(\bm{w}, \lambda, \gamma)  = \frac{1}{2}\bm{w}^{\top}\Sigma\bm{w} + \gamma(\mu - r_f - (\bm{z} - r_f \bm{1})^{\top}\bm{w}) \)\\[5pt]
-	MVP: \( \bm{w} = \gamma\Sigma^{-1}(\bm{z} - r_f \bm{1}) \), where \( \gamma = \frac{\mu - r_f}{A r_f^2 -2B r_f + C} \)\\[5pt]
-	Portfolio Variance: \( \sigma_P^2 = \frac{(\mu - r_f)^2}{A r_f^2 -2B r_f + C} \)\\[5pt]
-	Tangency Portfolio: \( \bm{w}_t = \gamma_t \Sigma^{-1}(\bm{z} - r_f \bm{1}) \), where \( \gamma_t = \frac{1}{B - Ar_f} \)
+	Lagrangian: \( \mathcal{L}(\bm{w}, \lambda, \gamma)  = \frac{1}{2}\bm{w}^{\top}\Sigma\bm{w} + \gamma(\mu - r_f - (\bm{z} - r_f \bm{1})^{\top}\bm{w}) \)\\\\
+	Minimum Variance Portfolio: \[ \bm{w} = \gamma\Sigma^{-1}(\bm{z} - r_f \bm{1}) \] where \[ \gamma = \frac{\mu - r_f}{A r_f^2 -2B r_f + C} \]\\\\
+	Portfolio Variance: \[ \sigma_P^2 = \frac{(\mu - r_f)^2}{A r_f^2 -2B r_f + C} \]\\\\
+	Tangency Portfolio: \[ \bm{w}_t = \gamma_t \Sigma^{-1}(\bm{z} - r_f \bm{1}) \] where \[ \gamma_t = \frac{1}{B - Ar_f} \]
+	\newpage
 	\subsubsection{Two Fund Theorem (N-risky assets)}
 	All efficient portfolios are a linear combination of any two efficient portfolios. 
 	\subsubsection{One Fund Theorem (N-risk + risk-free)}
 	All efficient portfolios are a linear combination of the tangent portfolio and the risk-free asset.
+	
+	\newpage
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Asset Pricing Models}
 	For all parts in section 2, \( i \) takes values \( 1,2,... N \) and indexes the assets in the market.
 	\subsection{CAPM}
@@ -171,7 +182,7 @@
 	\subsubsection{Assumptions}
 	Replace rigid CAPM assumptions with more relaxed assumptions:
 	\begin{enumerate}
-		\item No Arbitrage in the market
+		\item No arbitrage in the market
 		\item Large universe of securities
 		\item Returns follow a factor model
 	\end{enumerate}
@@ -198,9 +209,9 @@
 	where
 	\[	\E[r_i] = a_i = \lambda_0 + \lambda_1 b_{i,1} + \lambda_2 b_{i, 2} + ... + \lambda_K b_{i, K}\]
 	and \( \lambda_0 = r_f \) if there is a risk-free asset.
-	\subsection{Model Fitting and Market Efficiency}
-	\subsubsection{Estimating returns}
-	Using historical data to estimate mean return is not feasible: over 100 years of data would be needed to get a reliable estimate.
+	\subsection{Market Efficiency}
+	%\subsubsection{Estimating returns}
+	%Using historical data to estimate mean return is not feasible: over 100 years of data would be needed to get a reliable estimate.
 	\subsubsection{Investment approaches}
 	\begin{enumerate}
 		\item Technical analysis: Analyse historical data (price and volume).
@@ -214,7 +225,7 @@
 		\item Weak form: Market prices reflect all historical data 
 		%(technical analysis is useless).
 	\end{enumerate}
-
+	\newpage
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Discrete Time Derivative Pricing}
 	\subsection{Options}
@@ -526,6 +537,7 @@
 		\item Risk preference of investor no longer needs to be considered.
 		\item The real world probabilities of the stock going up or down are no longer needed for pricing.
 		\end{itemize}
+	\newpage
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Continuous Time Derivative Pricing}
 	\subsection{Measure Theory}
@@ -565,8 +577,9 @@
 	\\\\Let \( f(x), F(t, x) \) be deterministic functions with continuous (partial) derivatives up to the second order. Then, 
 	\begin{align*}
 		& df(X(t)) = f'(X_t) dt + \frac{1}{2}f''(X(t)) dX(t)^2 \\
-		& dF(t, X(t)) = \frac{\partial F}{\partial t}dt + \frac{\partial F}{\partial x}(t, X(t)) dX(t) + \frac{1}{2}\frac{\partial^2 F}{\partial x^2}(t, X(t)) dX(t)^2
+		& dF(t, X(t)) = \frac{\partial F}{\partial t}dt + \frac{\partial F}{\partial x} dX(t) + \frac{1}{2}\frac{\partial^2 F}{\partial x^2} dX(t)^2
 	\end{align*}
+	In the second equation, all partial derivatives of \( F \) are evaluated at \( (t, X(t)) \).\\
 	These equations can be simplified using the following multiplication table:
 	\begin{center}
 		\begin{tabular}{ccc}
@@ -590,8 +603,118 @@
 	such that \( W^{Q} \), where
 	\[	W^{\Q}(t) = W(t) - \int_{0}^{t} \gamma(s)ds,\]
 	is a \( \Q \)-Brownian Motion.
-	\subsubsection{}
+	\subsection{Pricing Framework}
+	\subsubsection{Fundamental Theorem of Asset Pricing}
+	The market has \textbf{no arbitrage} iff there exists an \textbf{equivalent martingale measure} \( \Q \) under which \textbf{discounted stock processes are martingales}. \( \Q \) is also called the risk-neutral measure.
+	\subsubsection{Pricing Framework Summary}
+	The following steps give a rigorous justification for derivative pricing under \( \Q \).
+	\begin{enumerate}
+		\item Identify a measure \( \Q \) where the discounted stock process \( Z(t) = S(t)/B(t) \) is a \( \Q \)-martingale.
+		\item Let \( Y(t) = \E^{\Q}\left[X/B(T)|\mathcal{F}_t\right] \). Under \( \Q \), \( Y(t) \) and \( Z(t) \) are martingales so by the martingale representation theorem, there exists a pre-visible process \( \phi \) such that
+		\[	Y(t) = Y(0) + \int_{0}^{t}\phi(s)dZ(s) 
+		   \]
+		\item Construct a portfolio \( \phi(t) \) units of Stock and \( \psi(t) := Y(t) - \phi(t)Z(t) \) dollars of Bond.
+		\item The portfolio \( (\phi(t), \psi(t)) \) is self-financing and has the same payoff as the derivative at maturity.
+		\item By the Law of One Price, the prices must match at \( t = 0 \) so
+		\[	\text{Price} = \E^{\Q}[X/B(T)]
+			\]
+	\end{enumerate}
 	\subsection{Black-Scholes-Merton Model}
+	\subsubsection{Assumptions}
+	\begin{enumerate}
+		\item No arbitrage
+		\item Unlimited borrowing at the risk-free rate \( r \)
+		\item No Market frictions (eg. short selling restrictions, transaction fees)
+		\item The underlying stock does not pay dividends.
+		\item The stock process follows a Geometric Brownian Motion
+		\begin{align*}
+			&S(t) = S_0 e^{\left(\mu - \frac{1}{2} \sigma^2\right)t + W(t)}
+			%\exp\left[\left(\mu - \frac{1}{2}\sigma^2\right)t + \sigma W(t)\right]
+			\\[4pt]
+			\iff &dS(t) = \mu S(t) dt + \sigma S(t) dW(t)
+		\end{align*}
+		\item The option is European
+	\end{enumerate}
+	\subsubsection{Put and Call Formulas}
+	%Consider options with underlying stock \( S(t) \), maturity \( T \) and strike price \( K \). 
+	Define:
+	\begin{align*}
+		d_1 = \frac{\ln\left(S(t)/ K\right) +\left(r + \frac{1}{2}\sigma^2\right)(T - t)}{\sigma\sqrt{T - t}},\qquad d_2 
+		%= \frac{\ln\left(S(t)/ K\right) +\left(r - \frac{1}{2}\sigma^2\right)(T - t)}{\sigma\sqrt{T - t}} 
+		= d_1 - \sigma\sqrt{T - t}
+	\end{align*}
+	Then,
+	\begin{align*}
+		& c_t = S(t)N(d_1) - Ke^{-r(T - t)}N(d_2)\\[4pt]
+		& p_t = Ke^{-r(T - t)}N(-d_2) - S_t N(-d_1),
+	\end{align*}
+	where \( N(\cdot) \) is the cdf of the standard normal distribution.
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Term Structure Modelling and Asset-Liability Management}
+	\subsection{Short-Rate Models}
+	%Merton Model: \( dr(t) = \alpha dt + \sigma dW(t) \)\\
+	%Vasicek Model: \( dr(t) = \alpha (\mu - r(t)) dt + \sigma dW(t) \)\\
+	%Cox-Ingersoll-Ross (CIR) Model: \( dr(t) = \alpha(\mu - r(t))dt + \sigma\sqrt{r(t)} dW(t) \)\\
+	%Hull-White Model: \( dr(t) = \alpha(t)(\mu(t) - r(t))dt + \sigma(t)dW(t) \)
+	\subsubsection{Merton Model:}
+	\[	
+		dr(t) = \alpha dt + \sigma dW(t)
+			\]
+	\begin{itemize}
+		\item Tractable
+		\item \( r(t) \) and \(\int_{0}^{t} r(t)dt \) are normally distributed.
+		\item Unrealistic (no mean-reversion and allows negative values)
+		\end{itemize}
+	\subsubsection{Hull White Model:}
+	\[	
+		dr(t) = \alpha(t)(\mu(t) - r(t))dt + \sigma(t)dW(t)
+		\]
+	\begin{itemize}
+		\item Generalised version of Merton-Model
+		\item \( \alpha,\sigma \) no longer constant
+		\end{itemize}
+	\subsubsection{Vasicek Model:}
+	\[	dr(t) = \alpha (\mu - r(t)) dt + \sigma dW(t)
+		\]
+	\begin{itemize}
+		\item Mean-Reverting
+		\item \( r(t) \) and \(\int_{0}^{t} r(t)dt \) are normally distributed.
+		\item Still allows negative values.
+		\end{itemize}
+	\subsubsection{CIR Model:}
+	\[	dr(t) = \alpha(\mu - r(t))dt + \sigma\sqrt{r(t)} dW(t)
+		\]
+		\begin{itemize}
+		\item Mean-Reverting
+		\item Square root term keeps \( r(t) \) positive
+	\end{itemize}
+	\subsection{Ho-Lee Model}
+	\subsubsection{Definition}
+	The Ho-Lee model models the short rate using a binomial tree. 
+	\[	r(k, s) = a(k) + b(k) s
+		\]
+	where \( k = \)time and \( s =  \) number of jumps. 
+	\begin{align*}
+		\begin{matrix}
+		  	& & r(2,2)\\
+			& r(1, 1) & r(2,1)\\
+		r(0, 0)	& r(1, 0) & r(2,0)
+		\end{matrix}
+		\qquad\qquad
+		\begin{matrix}
+			& & a(2) + 2b(2)\\
+			& a(1) + b(1) & a(2) +b(2)\\
+			a(0) & a(1) & a(2)
+		\end{matrix}
+	\end{align*}
+	\subsubsection{Calibration}
+	In general,
+	\[	b(k) = 2\cdot \text{st.dev}(r(k))
+		\]
+	The parameters \( a(k) \) are found by equating with price of Zero-Coupon Bonds. Take \( q = 1/2 \) in most situations.
+	\begin{align*}
+			& B(0, 1) = \frac{1}{1+a(0)}\\[3pt]
+			& B(0,2) = \frac{1}{1+a(0)}\left((1 - q)\frac{1}{1 + a(1)} + q\frac{1}{1 + a(1) + b(1)}\right)
+	\end{align*}
+	%\subsection{Asset-Liability Management}
 	\end{document}
