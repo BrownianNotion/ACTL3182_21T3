@@ -44,7 +44,7 @@
 	\begin{enumerate}
 		\item \textbf{Completeness (Comparability):} For all decisions \( A,B \), either \( A \prec B \), \( A\succ B \) or \( A\sim B \)
 		\item \textbf{Transitivity:} If \( A\succ B \) and \( B\succ C \), then \( A\succ C \)
-		\item \textbf{Independence:} If \( A\succ B \) then for any \( C \), 
+		\item \textbf{Independence:} If \( A\sim B \) then for any \( C \), 
 		\[	G(A,C;\alpha) \sim G(B, C; \alpha)\]
 		\item \textbf{Measurability:} If \( A\succ B\succ C \), there exists a unique \( \alpha \) such that
 		\[ B\sim G(A, C;\alpha)	\]
@@ -88,11 +88,11 @@
 		\item Shortfall Variance: \( \int_{-\infty}^{L}(L-x)^2  f_{X}(x)dx \)
 	\end{enumerate}
 	\subsubsection{Value-at-Risk:}
-	The Value-at-risk \textbf{at level }\( \bm{\alpha} \) is the maximum possible loss from holding a portfolio over a \textbf{given time period} so that the \textbf{probability of larger loss is} \(\bm{1 - \alpha}  \).\\
+	The Value-at-risk \textbf{at level }\( \bm{\alpha} \) is the maximum possible loss from holding a portfolio over a \textbf{given time period} so that the \textbf{probability of a larger loss is} \(\bm{1 - \alpha}  \).\\
 	In general, 
 	\[	\text{VaR}(\alpha) = \mu - X_{1 - \alpha},
 		\]
-	where \( X_{1-\alpha} \) is the \( 1 - \alpha \)-quantile of X.
+	where \( X_{1-\alpha} \) is the \( (1 - \alpha) \)-quantile of X.
 	If \( X\sim\mathcal{N}(\mu, \sigma^2) \), then 
 	\(	\text{VaR}(\alpha) = \sigma Z_{\alpha}
 		\).
@@ -100,7 +100,7 @@
 	\subsubsection{Two assets}
 	Minimum Variance Portfolio: \[	w_A = \frac{\sigma^2_B - \sigma_{AB}}{\sigma^2_A + \sigma^2_B - 2\sigma_{AB}},\quad w_B = 1 - w_A\]
 	Portfolio Variance:
-	\[	\sigma_P^2 = w_A^2 \sigma_A^2 + w_B^2 \sigma_B^2 + 2w_A w_B\rho_{AB}\sigma_{A}\sigma_B\]
+	\[	\sigma_P^2 = w_A^2 \sigma_A^2 + w_B^2 \sigma_B^2 + 2w_A w_B\sigma_{AB}\]
 	
 	\subsubsection{N-risky assets}
 	Minimise \( \displaystyle\sigma_P^2 = \bm{w}^{\top} \Sigma \bm{w} \), \( \quad \)subject to \( \bm{1}^{\top}\bm{w}= 1 \) and \( \bm{z}^{\top}\bm{w}=\mu \).\\[5pt]
@@ -111,7 +111,7 @@
 				\end{align*} 
 	%\\[5pt]
 	Minimum Variance Portfolio: 
-	\[ \displaystyle\bm{w} = \lambda \Sigma^{-1} \bm{1} + \gamma \Sigma^{-1}\bm{z}  \]where \[ \lambda = \frac{C - \mu B}{\Delta}, \quad\gamma = \frac{\mu A - B}{\Delta} \]\\\\
+	\[ \displaystyle\bm{w} = \lambda \Sigma^{-1} \bm{1} + \gamma \Sigma^{-1}\bm{z}  \]where \[ \lambda = \frac{C - B\mu}{\Delta}, \quad\gamma = \frac{A \mu- B}{\Delta} \]\\\\
 	%\\[5pt]
 	Portfolio Variance: \[ \sigma_P^2 = \frac{A\mu^2 -2B\mu + C}{\Delta} \]\\
 	Global Minimum Variance Portfolio: \[ \bm{w}_g = \frac{1}{A}\Sigma^{-1}\bm{1} \]
@@ -135,10 +135,10 @@
 	\subsection{CAPM}
 	\subsection{CAPM Assumptions}
 	\begin{enumerate}
-		\item Investors choose optimal portfolios based only on mean and variance of returns. Justified if returns are normally distributed returns or utility functions are quadratic.
-		\item Homogeneity: Investors agree on distribution of returns and plan over a single common period.
+		\item Investors choose optimal portfolios based only on the mean and variance of returns. Justified if returns are normally distributed returns or utility functions are quadratic.
+		\item Homogeneity: Investors agree on the distribution of returns and plan over a single common period.
 		\item No Market Frictions (eg. taxes, short-selling restrictions, restricted information)
-		\item Investors can borrow or lend at the risk-free rate.
+		\item Investors can borrow or lend without limit at the risk-free rate.
 		\item Market Portfolio consists of all publicly traded assets.
 	\end{enumerate}
 	\subsubsection{Capital Market Line}
@@ -203,12 +203,12 @@
 	\end{align*}
 	Under no-arbitrage, 
 	\[	a_i = \lambda_0 + \lambda_1 b_i,\]
-	where \( \lambda_0 = r_f \) if there is a risk-free asset.
+	where \( \lambda_0 = r_f \) if there is a risk-free asset. The \( \lambda_i \)'s are called factor prices.
 	\subsubsection{Multi-Factor APT Returns}
 	\[	r_i = a_i + b_{i,1 }f_1 + b_{i,2} f_2 + ... + b_{i, K}f_K + \epsilon_i\]
 	where
 	\[	\E[r_i] = a_i = \lambda_0 + \lambda_1 b_{i,1} + \lambda_2 b_{i, 2} + ... + \lambda_K b_{i, K}\]
-	and \( \lambda_0 = r_f \) if there is a risk-free asset.
+	and \( \lambda_0 = r_f \) if there is a risk-free asset. 
 	\subsection{Market Efficiency}
 	%\subsubsection{Estimating returns}
 	%Using historical data to estimate mean return is not feasible: over 100 years of data would be needed to get a reliable estimate.
@@ -600,7 +600,7 @@
 	Suppose \( W(t) \) is a \( \PR \)-Brownian Motion and \( \gamma(\cdot) \) is a pre-visible process. Then there exists an equivalent measure \( \Q \) with Radon-Nikodym derivative 
 	\[	\zeta_t = \exp\left[-\int_{0}^{t}\gamma(s)dW(s) - \int_{0}^{t}\gamma(s)^2 ds\right]
 		\]
-	such that \( W^{Q} \), where
+	such that \( W^{Q}(t) \), where
 	\[	W^{\Q}(t) = W(t) - \int_{0}^{t} \gamma(s)ds,\]
 	is a \( \Q \)-Brownian Motion.
 	\subsection{Pricing Framework}
@@ -665,24 +665,27 @@
 		\item \( r(t) \) and \(\int_{0}^{t} r(t)dt \) are normally distributed.
 		\item Unrealistic (no mean-reversion and allows negative values)
 		\end{itemize}
-	\subsubsection{Hull White Model:}
-	\[	
-		dr(t) = \alpha(t)(\mu(t) - r(t))dt + \sigma(t)dW(t)
-		\]
-	\begin{itemize}
-		\item Generalised version of Merton-Model
-		\item \( \alpha,\sigma \) no longer constant
-		\end{itemize}
+	
 	\subsubsection{Vasicek Model:}
-	\[	dr(t) = \alpha (\mu - r(t)) dt + \sigma dW(t)
+	\[	dr(t) = \alpha \left[\mu - r(t)\right] dt + \sigma dW(t)
 		\]
 	\begin{itemize}
 		\item Mean-Reverting
 		\item \( r(t) \) and \(\int_{0}^{t} r(t)dt \) are normally distributed.
 		\item Still allows negative values.
 		\end{itemize}
+	
+	\subsubsection{Hull White Model:}
+	\[	
+	dr(t) = \alpha(t)\left[\mu(t) - r(t)\right]dt + \sigma(t)dW(t)
+	\]
+	\begin{itemize}
+		\item Generalised version of Vasicek-Model
+		\item \( \alpha,\sigma \) no longer constant
+	\end{itemize}
+
 	\subsubsection{CIR Model:}
-	\[	dr(t) = \alpha(\mu - r(t))dt + \sigma\sqrt{r(t)} dW(t)
+	\[	dr(t) = \alpha\left[\mu - r(t)\right]dt + \sigma\sqrt{r(t)} dW(t)
 		\]
 		\begin{itemize}
 		\item Mean-Reverting
