@@ -576,7 +576,7 @@
 	%just as the chain rule tells us how to differentiate functions of deterministic functions. 
 	\\\\Let \( f(x), F(t, x) \) be deterministic functions with continuous (partial) derivatives up to the second order. Then, 
 	\begin{align*}
-		& df(X(t)) = f'(X_t) dt + \frac{1}{2}f''(X(t)) dX(t)^2 \\
+		& df(X(t)) = f'(X(t)) dt + \frac{1}{2}f''(X(t)) dX(t)^2 \\
 		& dF(t, X(t)) = \frac{\partial F}{\partial t}dt + \frac{\partial F}{\partial x} dX(t) + \frac{1}{2}\frac{\partial^2 F}{\partial x^2} dX(t)^2
 	\end{align*}
 	In the second equation, all partial derivatives of \( F \) are evaluated at \( (t, X(t)) \).\\
@@ -588,7 +588,7 @@
 			\hline
 			\( dt \) & 0 & 0 \\
 			\hline
-			\( dW(t) \) & 0 & dt \\
+			\( dW(t) \) & 0 & $dt$ \\
 			\hline
 			\end{tabular}
 		\end{center}

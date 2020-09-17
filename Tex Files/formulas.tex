@@ -72,7 +72,7 @@
 		\item Shortfall Variance: \( \int_{-\infty}^{L}(L-x)^2  f_{X}(x)dx \)
 	\end{enumerate}
 	\subsubsection{Value-at-Risk:}
-	The Value-at-risk \textbf{at level }\( \bm{\alpha} \) is the maximum possible loss from holding a portfolio over a \textbf{given time period} so that the \textbf{probability of larger loss is} \(\bm{1 - \alpha}  \).\\
+	The Value-at-risk \textbf{at level }\( \bm{\alpha} \) is the maximum possible loss from holding a portfolio over a \textbf{given time period} so that the \textbf{probability of a larger loss is} \(\bm{1 - \alpha}  \).\\
 	In general, 
 	\[	\text{VaR}(\alpha) = \mu - X_{1 - \alpha},
 		\]
@@ -476,7 +476,7 @@
 	\subsubsection{It\^{o}'s Lemma}
 	Let \( f(x), F(t, x) \) be deterministic functions with continuous (partial) derivatives up to the second order. Then, 
 	\begin{align*}
-		& df(X(t)) = f'(X_t) dt + \frac{1}{2}f''(X(t)) dX(t)^2 \\
+		& df(X(t)) = f'(X(t)) dt + \frac{1}{2}f''(X(t)) dX(t)^2 \\
 		& dF(t, X(t)) = \frac{\partial F}{\partial t}dt + \frac{\partial F}{\partial x} dX(t) + \frac{1}{2}\frac{\partial^2 F}{\partial x^2} dX(t)^2
 	\end{align*}
 	It\^{o} multiplication table:
