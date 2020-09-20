@@ -61,11 +61,11 @@
 		\hline
 		\textbf{Type} & \textbf{Wealth Preference} & \textbf{Utility Preference} & $\bm{U''}$ & \textbf{Concavity}\\
 		\hline
-		Risk-Averse & \( \E[W] \succ W \) & \( U(\E[W]) > E[U(W)] \) & \( U'' < 0 \) & concave\\
+		Risk-Averse & \( \E[W] \succ W \) & \( U(\E[W]) > \E[U(W)] \) & \( U'' < 0 \) & concave\\
 		\hline
-		Risk-Neutral & \( \E[W] \sim W \) & \( U(\E[W]) = E[U(W)] \) & \( U'' = 0 \) & linear\\
+		Risk-Neutral & \( \E[W] \sim W \) & \( U(\E[W]) = \E[U(W)] \) & \( U'' = 0 \) & linear\\
 		\hline
-		Risk-Lover &\( \E[W] \prec W \) & \( U(\E[W]) < E[U(W)] \) & \( U'' > 0 \) & convex\\
+		Risk-Lover &\( \E[W] \prec W \) & \( U(\E[W]) < \E[U(W)] \) & \( U'' > 0 \) & convex\\
 		\hline
 		\end{tabular}
 	\end{center}
@@ -76,6 +76,7 @@
 	\subsubsection{Risk Aversion}
 	Absolute risk aversion \( A(w) \) and relative risk aversion \( R(w) \)
 	\[	A(w) = -\frac{U''(w)}{U'(w)},\quad R(w) = -w\frac{U''(w)}{U'(w)}.\] 
+	If \( A(w) \) is decreasing, then an investor invests more \( \$ \) in risky assets as wealth increases.\\If \( R(w) \) is decreasing, an investor invests a higher proportion of wealth in risky assets as wealth increases.
 	\subsection{Investment Risk Measures}
 	\subsubsection{Definition}
 	A function \( \mathcal{\theta}: X\to\R\) that summarises an investment's risk with a single number.
