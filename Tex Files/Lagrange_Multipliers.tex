@@ -74,7 +74,7 @@
 		Let \( f:\R^n \to\R \) denote the function to be optimised, subject to the constraint 
 		\[	g(\vx) = C, \]
 		where \( \vx\in\R^n \)	and \( C\in\R \) is a constant. If \( \nabla g \neq 0 \), then \( f \) achieves its maxima/minima at the points where 
-		\[	\nabla f = \lambda g.\]
+		\[	\nabla f = \lambda \nabla g.\]
 		\tcblower
 		\begin{itemize}
 			\item Essentially, the gradients of \( f,g \) must be parallel for \( f \) to be maximised or minimised.
@@ -98,7 +98,7 @@
 	Hence, we need to maximise \( f \) with respect to the constraint \( g(x,y) = 1 \).
 	By the method of Lagrange multipliers, the maxima of \( f \) occur when 
 	\begin{align*}
-		     &\nabla f = \lambda g, \quad\text{for some }\lambda\in\R\\
+		     &\nabla f = \lambda\nabla g, \quad\text{for some }\lambda\in\R\\
 		\iff & \left[y, x\right]^{\top} = \lambda \left[x, \frac{2y}{3}\right]^{\top} \\
 		\iff & y = \lambda x\quad (1), \quad\text{and}\quad x = \lambda\cdot\frac{2y}{3} \quad (2)
 	\end{align*}
