@@ -1,0 +1,96 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{bm}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage[colorlinks = true]{hyperref}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{UNSW Business School}
+\rhead{ACTL3182 Module 4}
+\cfoot{Page \thepage}  %PERHAPS Add UNSW COPYRIGHT FOOTER
+\setlength{\headheight}{17pt} 
+
+\title{\textbf{ACTL3182 Module 4 Extra Questions: Radon-Nikodym Theorem, Martingale and It\^o's Lemma}}
+\author{Andrew Wu}
+\date{October 2020}
+
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\PR}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Q}{\mathcal{Q}}
+
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item Consider two independent coin flips; that is let the sample space be $\Omega:=\{HH, HT, TH, TT\}$. Under the $\PR$ measure, the coin is fair. Under the $\Q$ measure, the coin has a probability of $\frac{1}{3}$ of landing on heads on every flip. 
+		\begin{enumerate}
+			\item Find the probability of each scenario under $\PR$ and $\Q$.
+			\item Find the Radon-Nikodym Derivative $\frac{d\Q}{d\PR}$.
+			\item Show that for the event $A$, where $A$ represents getting a head on the first flip, that
+			\[	\Q(A) = \E_{P}\left[\frac{d\Q}{d\PR}1_{A}\right]
+					\]
+ 		\end{enumerate}
+		\item Consider the stochastic process 
+		\[	X(t) = \sum_{k=1}^{t}Z_{k},\quad X(0) = 0
+			\]
+		where $Z_{k}$ are iid with distribution 
+		\[	Z_{k} = \begin{cases}
+						+1 &  \quad \text{w.p. } \frac{1}{2} \\
+						-1 & \quad \text{w.p. } \frac{1}{2}.
+						\end{cases}
+			\]
+			\begin{enumerate}
+				\item What is $\E[X(t+1)|\mathcal{F}_{t}]$?
+				\item Briefly explain why $X(t)$ is a martingale.
+				\item Now consider a time interval $[0, T]$ and divide the interval into $n$ equal subintervals of length $T/n$. Redefine $Z_{k}$ so that the jumps are now of size $\sqrt{T/n}$:
+				\[	Z_{k} = \begin{cases}
+				+\sqrt{\frac{T}{n}} &  \quad \text{w.p. } \frac{1}{2} \\[5pt]
+				-\sqrt{\frac{T}{n}} & \quad \text{w.p. } \frac{1}{2}.
+				\end{cases}
+				\]
+				Draw a possible graph of $X(t)$ for $n=1,2$. What happens as $n\to\infty$?
+				\item Calculate $\E[X(t)]$ and $\text{Var}[X(t)]$.
+				\item Using the Central Limit Theorem, determine the limiting distribution of $X(t)$.
+				\item What continuous-time process does $X(t)$ converge to?
+			\end{enumerate}
+		\item Consider the continuous-time Radon-Nikodym derivative $\zeta(t)$:
+		\[	\zeta(t) = \exp\left(-\int_{0}^{t}\gamma_{s}dW(s) -\frac{1}{2} \int_{0}^{t}\gamma_{s}^{2}ds\right)
+			\]
+		Prove that $\zeta(t)$ is a martingale.
+		\item (Challenge) Consider the stochastic differential equation
+		\[	dX(t) = \alpha(\mu - X(t))+ \sigma dW(t),\quad X(0) = x_{0}.
+		\]
+		The solution to this equation is called the Ornstein-Uhlenbeck process and can be used to model a massive particle moving under Brownian Motion under friction.
+		\begin{enumerate}
+			\item Using It\^{o}'s Lemma, show that the solution to the following stochastic equation
+			is the stochastic process $X(t)$ where
+			\[	X(t) = e^{-\alpha t}x_{0} + \mu(1 - e^{-\alpha t}) + \sigma\int_{0}^{t}e^{-\alpha(t - s)}dW(s).
+			\]
+			\item Explain why 
+			\[	\E[X(t)] = e^{-\alpha t}x_{0} + \mu(1 - e^{-\alpha t}).
+				\]
+			Hint: What type of stochastic process is $\int_{0}^{t}e^{-\alpha(t - s)}dW(s)$?
+			\item The It\^{o} isometry is a special property that allows the expected value of the product of It\^{o} integrals to be calculated using Riemann integrals instead. That is, for two suitable stochastic processes $X(t)$, $Y(t)$, we have:
+			\[	\E\left[\int_{0}^{t}X(s)dW(s)\int_{0}^{t}Y(s)dW(s)\right]
+				 = \E\left[\int_{0}^{t}X(s)Y(s)ds\right]
+				\]
+			Assuming this property holds for $X(t)$, show that
+			\[	\text{Var}[X(t)] = \frac{\sigma^{2}}{2\alpha}(1 - e^{-2\alpha t}).
+				\]
+			\item What is it the distribution of $X(t)$? Explain this intuitively.
+			\item (Extra challenge!) Show that for any $s, t\geq 0$:
+			\[	\text{Cov}(X(s), X(t)) = \frac{\sigma^{2}}{2\alpha}(e^{-\alpha|t - s|} - e^{-\alpha(s + t)})
+				\]
+		\end{enumerate}
+		 
+	\end{enumerate}
+	\end{document}
