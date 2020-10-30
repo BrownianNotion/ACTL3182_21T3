@@ -493,10 +493,10 @@
 		\end{center}
 	\subsubsection{Girsanov-Theorem}
 	Suppose \( W(t) \) is a \( \PR \)-Brownian Motion and \( \gamma(\cdot) \) is a pre-visible process. Then there exists an equivalent measure \( \Q \) with Radon-Nikodym derivative 
-	\[	\zeta_t = \exp\left[-\int_{0}^{t}\gamma(s)dW(s) - \int_{0}^{t}\gamma(s)^2 ds\right]
+	\[	\zeta_t = \exp\left[-\int_{0}^{t}\gamma(s)dW(s) - \frac{1}{2}\int_{0}^{t}\gamma(s)^2 ds\right]
 		\]
 	such that \( W^{Q} \), where
-	\[	W^{\Q}(t) = W(t) - \int_{0}^{t} \gamma(s)ds,\]
+	\[	W^{\Q}(t) = W(t) + \int_{0}^{t} \gamma(s)ds,\]
 	is a \( \Q \)-Brownian Motion.
 	
 	\subsection{Black-Scholes-Merton Model}
@@ -523,6 +523,7 @@
 	\end{align*}
 	where \( N(\cdot) \) is the cdf of the standard normal distribution.
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\newpage
 	\section{Term Structure Modelling and Asset-Liability Management}
 	\subsection{Short-Rate Models}
 	%Merton Model: \( dr(t) = \alpha dt + \sigma dW(t) \)\\

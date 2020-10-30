@@ -1,0 +1,14 @@
+---
+title: "Week X Discussion Question Solution"
+author: "ACTL3182"
+date: "08/10/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+```
