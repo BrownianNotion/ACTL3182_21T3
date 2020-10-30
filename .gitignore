@@ -46,4 +46,4 @@ vignettes/*.pdf
 *.out
 
 #Hide Discussion Questions Solution folder
-'Discussion Question Solutions'/
+DQSol/
