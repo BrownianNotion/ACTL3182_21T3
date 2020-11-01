@@ -40,27 +40,31 @@
 					\]
  		\end{enumerate}
 		\item Consider the stochastic process 
-		\[	X(n) = \sum_{k=1}^{n}Z_{k},\quad X(0) = 0
+		\[	X(t) = \sum_{k=1}^{t}Z_{k},\quad X(0) = 0
 			\]
-		where $Z_{k}$, $k=1,2,...n$ are iid with distribution 
+		where $Z_{k}$, $k=1,2,...t$ are iid with distribution 
 		\[	Z_{k} = \begin{cases}
 						+1 &  \quad \text{w.p. } \frac{1}{2} \\
 						-1 & \quad \text{w.p. } \frac{1}{2}.
 						\end{cases}
 			\]
 			\begin{enumerate}
-				\item What is $\E[X(n+1)|\mathcal{F}_{n}]$?
-				\item Briefly explain why $X(n)$ is a martingale.
-				\item Now consider a time interval $[0, T]$ and divide the interval into $n$ equal subintervals of length $T/n$. Redefine $Z_{k}$ so that the jumps are now of size $\sqrt{T/n}$:
-				\[	Z_{k} = \begin{cases}
-				+\sqrt{\frac{T}{n}} &  \quad \text{w.p. } \frac{1}{2} \\[5pt]
-				-\sqrt{\frac{T}{n}} & \quad \text{w.p. } \frac{1}{2}.
+				\item What is $\E[X(t+1)|\mathcal{F}_{t}]$?
+				\item Briefly explain why $X(t)$ is a martingale.
+				\item Now consider a time interval $[0, t]$ and divide the interval into $n$ equal subintervals of length $t/n$. Let $X_{n}(t)$ be the process
+				\[	X_{n}(t) = \sum_{k=1}^{n}Z_{k, n}
+				\]
+				where $Z_{k, n}$ are now jumps of size $\sqrt{t/n}$:
+				\[	Z_{k, n} = \begin{cases}
+				+\sqrt{\frac{t}{n}} &  \quad \text{w.p. } \frac{1}{2} \\[5pt]
+				-\sqrt{\frac{t}{n}} & \quad \text{w.p. } \frac{1}{2}.
 				\end{cases}
 				\]
-				Draw a possible graph of $X(t)$ for $n=1,2$. What happens as $n\to\infty$?
-				\item Calculate $\E[X(t)]$ and $\text{Var}[X(t)]$.
-				\item Using the Central Limit Theorem, determine the limiting distribution of $X(t)$.
-				\item What continuous-time process does $X(t)$ converge to?
+				
+				Draw a possible graph of $X_{n}(t)$ for $n=1,2$. What happens as $n\to\infty$?
+				\item Calculate $\E[X_{n}(t)]$ and $\text{Var}[X_{n}(t)]$.
+				\item Using the Central Limit Theorem, determine the limiting distribution of $X_{n}(t)$.
+				\item What continuous-time process does $X_{n}(t)$ converge to?
 			\end{enumerate}
 		\item Consider the continuous-time Radon-Nikodym derivative $\zeta(t)$:
 		\[	\zeta(t) = \exp\left(-\int_{0}^{t}\gamma_{s}dW(s) -\frac{1}{2} \int_{0}^{t}\gamma_{s}^{2}ds\right)
@@ -69,7 +73,7 @@
 		\item (Challenge) Consider the stochastic differential equation
 		\[	dX(t) = \alpha(\mu - X(t))+ \sigma dW(t),\quad X(0) = x_{0}.
 		\]
-		The solution to this equation is called the Ornstein-Uhlenbeck process and can be used to model a massive particle moving under Brownian Motion under friction.
+		The solution to this equation is called the Ornstein-Uhlenbeck process and can be used to model a massive particle moving under Brownian Motion when friction is accounted for.
 		\begin{enumerate}
 			\item Using It\^{o}'s Lemma, show that the solution to the following stochastic equation
 			is the stochastic process $X(t)$ where
@@ -87,10 +91,20 @@
 			\[	\text{Var}[X(t)] = \frac{\sigma^{2}}{2\alpha}(1 - e^{-2\alpha t}).
 				\]
 			\item What is it the distribution of $X(t)$? Explain this intuitively.
-			\item (Extra challenge!) Show that for any $s, t\geq 0$:
+			\item Show that for any $s, t\geq 0$:
 			\[	\text{Cov}(X(s), X(t)) = \frac{\sigma^{2}}{2\alpha}(e^{-\alpha|t - s|} - e^{-\alpha(s + t)})
 				\]
 		\end{enumerate}
-		 
 	\end{enumerate}
+	\textbf{Select Answers:}\\
+	1. (b) The Radon-Nikodym derivative is the ratio of the two probabilities;
+	\[	\frac{d\mathcal{Q}}{d\PR} = \begin{cases}
+										4/9 & \quad \text{if }HH\\
+										8/9 & \quad \text{if }HT\\
+										8/9 & \quad \text{if }TH\\
+										16/9 & \quad \text{if }TT\\
+										\end{cases}
+			\] 
+	2. (a) $X(t)\quad$ (d) $\mathbb{E}[X_{n}(t)] = 0$, $\text{Var}[X_{n}(t)] = t\quad$ (e) $\mathcal{N}(0,t)\quad$ (e) Wiener Process/Brownian Motion.\\\\
+	4. (d) $\mathcal{N}\left(e^{-\alpha t}x_{0} + \mu(1 - e^{-\alpha t}), \frac{\sigma^{2}}{2\alpha}(1 - e^{-2\alpha t})\right)$
 	\end{document}
