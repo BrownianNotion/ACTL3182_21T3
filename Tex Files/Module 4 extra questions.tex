@@ -70,13 +70,13 @@
 		\[	\zeta(t) = \exp\left(-\int_{0}^{t}\gamma_{s}dW(s) -\frac{1}{2} \int_{0}^{t}\gamma_{s}^{2}ds\right)
 			\]
 		Prove that $\zeta(t)$ is a martingale.
-		\item (Challenge) Consider the stochastic differential equation
+		\item (Challenge) Consider the stochastic differential equation (SDE)
 		\[	dX(t) = \alpha(\mu - X(t))+ \sigma dW(t),\quad X(0) = x_{0}.
 		\]
 		The solution to this equation is called the Ornstein-Uhlenbeck process and can be used to model a massive particle moving under Brownian Motion when friction is accounted for.
 		\begin{enumerate}
-			\item Using It\^{o}'s Lemma, show that the solution to the following stochastic equation
-			is the stochastic process $X(t)$ where
+			\item Using It\^{o}'s Lemma, show that the solution to the SDE above 
+			is 
 			\[	X(t) = e^{-\alpha t}x_{0} + \mu(1 - e^{-\alpha t}) + \sigma\int_{0}^{t}e^{-\alpha(t - s)}dW(s).
 			\]
 			\item Explain why 
