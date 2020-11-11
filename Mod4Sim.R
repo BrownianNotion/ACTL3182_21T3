@@ -13,7 +13,8 @@ S = exp((mu - 0.5*sigma^2)*Time + sigma*W)
 #Plotting
 df <- data.frame(Time, W, S)
 p <- ggplot(df) +
-  geom_line(aes(x = Time, y = S), colour = "black")
+  geom_line(aes(x = Time, y = S), colour = "black") +
+  ggtitle("Geometric Brownian Motion")
   #geom_line(aes(x = Time, y = W), colour = "red")
 
 #Animate plot.
