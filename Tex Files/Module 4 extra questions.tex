@@ -95,6 +95,15 @@
 			\[	\text{Cov}(X(s), X(t)) = \frac{\sigma^{2}}{2\alpha}(e^{-\alpha|t - s|} - e^{-\alpha(s + t)})
 				\]
 		\end{enumerate}
+	\item The price at time $t$ of a put option is given by 
+	\[		p(t, S_t) = Ke^{-r(T - t)}N(-d_{2}) - S_t N(d_1),
+				\]
+	where
+	\[		d_{1} = \frac{\ln(S_t/ K) + (r + \frac{1}{2}\sigma^2)(T -t)}{\sigma \sqrt{T - t}},\qquad d_{2} = d_{1} - \sigma \sqrt{T - t}.
+			\]
+	Derive the expressions for the replicating portfolio $(\phi(t), \psi(t))$ given that
+	\[		\phi(t) = \frac{\partial p}{\partial S}(t, S_t),\qquad \psi(t)=\frac{p(t, S_t) - S_t \phi(t)}{B(t)}.
+			\]
 	\end{enumerate}
 	\textbf{Select Answers:}\\
 	1. (b) The Radon-Nikodym derivative is the ratio of the two probabilities;
