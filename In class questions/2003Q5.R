@@ -25,6 +25,8 @@ phi1d
 psi1d = exp(-2*r)*(f5 - phi1d*10*u*d)
 psi1d
 
+
+
 f3 = phi1u * 10*u + psi1u*exp(r)
 f3
 f2 = phi1d * 10*d + psi1d*exp(r)
