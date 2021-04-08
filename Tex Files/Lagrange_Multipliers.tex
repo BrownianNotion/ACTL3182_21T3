@@ -52,7 +52,7 @@
 
 \begin{document}
 	\maketitle
-	\noindent This sheet provides a brief revision and some basic examples on Lagrange multipliers, a common method in constrained optimisation. The examples and exercises (Appendix) are optional though helpful for a better understanding of the technique.\\ In ACTL3182, the questions on Lagrange multipliers will not be like the examples in this sheet. If any derivation is required, it will most likely be very similar to the lecture slides.
+	\noindent This sheet provides a brief revision and some basic examples on Lagrange multipliers, a common method in constrained optimisation. In ACTL3182, the questions on Lagrange multipliers will resemble the lecture slides rather than these examples, which are only for your understanding.
 	
 	\section{Lagrange Multipliers}
 	%\subsection{The Theorem}
@@ -65,14 +65,17 @@
 		\tcblower
 		\begin{itemize}
 			\item \( \nabla f \) is equivalent to the vector derivative \( \frac{\partial f}{\partial \bm{x}} \) when \( \vx\in\R^n \) i.e. when \( \vx \) is a vector of the same dimensions as the domain.
-			\item \( \nabla f \) is the direction of the tangent plane just as \( f'(x) \) is the slope of the tangent in one dimension.
+			\item \( \nabla f \) is the direction in which $f$ is increasing the most (steepest ascent). To see this, consider the Taylor-expansion
+			\[	f(\bm{x}+\Delta \bm{x}) \approx f(\bm{x}) + \nabla f(\bm{x})\cdot\Delta\bm{x},
+				\]
+			where the dot product $\nabla f(\bm{x})\cdot\Delta\bm{x}=\lVert \nabla f(\bm{x})\rVert\lVert \Delta\bm{x}\rVert\cos\theta$ is maximised when $\Delta x$ is parallel to $\nabla f(\bm{x})$.
 		\end{itemize}
 	\end{definition}
 	\bigskip
 	\noindent 
 	\begin{theorem}{Lagrange Multipliers (one constraint)}{}
-		Let \( f:\R^n \to\R \) denote the function to be optimised, subject to the constraint 
-		\[	g(\vx) = C, \]
+		Suppose we want to optimise \( f:\R^n \to\R \), subject to the constraint 
+		\(	g(\vx) = C\),
 		where \( \vx\in\R^n \)	and \( C\in\R \) is a constant. If \( \nabla g \neq 0 \), then \( f \) achieves its maxima/minima at the points where 
 		\[	\nabla f = \lambda \nabla g.\]
 		\tcblower
@@ -82,7 +85,8 @@
 		\end{itemize} 
 	\end{theorem}
 \smallskip
-	\noindent \textbf{Note:} \( \nabla f = \lambda\nabla g \) is a \textbf{necessary but not a sufficient} condition for optima. That is, the equation can still hold at some point that is not actually a maximum or minimum. Therefore it is important to check the value of \( f \) at each point where \( \nabla f = \lambda\nabla g \), or compute the Hessian matrix (this is essentially the second derivative test in higher dimensions). 
+	\noindent \textbf{Note:} \( \nabla f = \lambda\nabla g \) is a \textbf{necessary but not a sufficient} condition for optima. That is, the equation can still hold at some point that is not actually a maximum or minimum. Therefore it is important to check the value of \( f \) at each point where \( \nabla f = \lambda\nabla g \).
+	
 	\begin{example}{One constraint}{}
 		%\begin{enumerate}
 			%\item 
@@ -112,7 +116,7 @@
 			 & \frac{x^2}{2} + \frac{\frac{3}{2} x^2}{3} = 1 \\
 		\iff & x = \pm 1
 	\end{align*}
-	Resubstituting into \( (3) \), we obtain \( y = \pm\sqrt{3/2} \). Clearly \( f \) is maximised when \( xy >0 \), so \( f \) achieves its maximum at the points \( (1, \sqrt{3/2}) \) and \((-1, -\sqrt{3/2})  \). Notice that we did not need to find the value of \( \lambda \) in this example, although sometimes it is easier to do so.\\\\
+	Substituting into \( (3) \), we obtain \( y = \pm\sqrt{3/2} \). Clearly \( f \) is maximised when \( xy >0 \), so \( f \) achieves its maximum at the points \( (1, \sqrt{3/2}) \) and \((-1, -\sqrt{3/2})  \). Notice that we did not need to find the value of \( \lambda \) in this example, although sometimes it is easier to do so.\\\\
 	\noindent Now, we state the two-constraint theorem. Solving the two-constraint case by hand is complicated so the example has been moved to the appendix.\\
 	\begin{theorem}{Lagrange Multipliers (two constraints)}{}
 			Let \( f:\R^n \to\R \) denote the function to be optimised, subject to the constraints 
