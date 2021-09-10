@@ -45,5 +45,6 @@ vignettes/*.pdf
 *.synctex.gz
 *.out
 
-# Latex folder
+# Ignore folders
 # 'Tex Files'/
+Slides_and_Exercises/
