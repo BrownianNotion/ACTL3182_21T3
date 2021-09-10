@@ -37,32 +37,32 @@
 			\item Find the Radon-Nikodym Derivative $\frac{d\Q}{d\PR}$.
 			\item Show that for the event $A$, where $A$ represents getting a head on the first flip, that
 			\[	\Q(A) = \E_{P}\left[\frac{d\Q}{d\PR}1_{A}\right]
-					\]
- 		\end{enumerate}
+			\]
+		\end{enumerate}
 		\item Consider the stochastic process 
 		\[	X_n = \sum_{k=1}^{n}Z_{k},\quad X(0) = 0
-			\]
+		\]
 		where $Z_{k}$, $k=1,2,...n$ are iid with distribution 
 		\[	Z_{k} = \begin{cases}
-						+1 &  \quad \text{w.p. } \frac{1}{2} \\
-						-1 & \quad \text{w.p. } \frac{1}{2}.
-						\end{cases}
+			+1 &  \quad \text{w.p. } \frac{1}{2} \\
+			-1 & \quad \text{w.p. } \frac{1}{2}.
+		\end{cases}
+		\]
+		\begin{enumerate}
+			\item What is $\E[X_{n+1}|\mathcal{F}_{n}]$?
+			\item Briefly explain why $X_n$ is a martingale.
+			\item Now consider a time interval $[0, T]$ and divide the interval into $n$ equal subintervals of length $\Delta = T/n$. Let $X_t^{n}$ be the process
+			\[	X_t^{n} = \sqrt{\Delta}\sum_{k=1}^{\lfloor t/\Delta \rfloor}Z_{k}, \quad \text{for } 0\leq t\leq T. 
 			\]
-			\begin{enumerate}
-				\item What is $\E[X_{n+1}|\mathcal{F}_{n}]$?
-				\item Briefly explain why $X_n$ is a martingale.
-				\item Now consider a time interval $[0, T]$ and divide the interval into $n$ equal subintervals of length $\Delta = T/n$. Let $X_t^{n}$ be the process
-				\[	X_t^{n} = \sqrt{\Delta}\sum_{k=1}^{\lfloor t/\Delta \rfloor}Z_{k}, \quad \text{for } 0\leq t\leq T. 
-				\]
-				
-				Draw a possible graph of $X^{n}_{t}$ for $n=1,2$. What happens as $n\to\infty$?
-				\item Calculate $\E[X^{n}_{t}]$ and $\text{Var}[X^{n}_{t}]$.
-				\item Using the Central Limit Theorem, determine the limiting distribution of $X^{n}_{t}$.
-				\item What continuous-time process does $X^{n}_{t}$ converge to? (no formal justification required)
-			\end{enumerate}
+			
+			Draw a possible graph of $X^{n}_{t}$ for $n=1,2$. What happens as $n\to\infty$?
+			\item Calculate $\E[X^{n}_{t}]$ and $\text{Var}[X^{n}_{t}]$.
+			\item Using the Central Limit Theorem, determine the limiting distribution of $X^{n}_{t}$.
+			\item What continuous-time process does $X^{n}_{t}$ converge to? (no formal justification required)
+		\end{enumerate}
 		\item Consider the continuous-time Radon-Nikodym derivative $\zeta(t)$:
 		\[	\zeta(t) = \exp\left(-\int_{0}^{t}\gamma_{s}dW(s) -\frac{1}{2} \int_{0}^{t}\gamma_{s}^{2}ds\right)
-			\]
+		\]
 		Prove that $\zeta(t)$ is a martingale.
 		\item (Challenge) Consider the stochastic differential equation (SDE)
 		\[	dX(t) = \alpha(\mu - X(t))+ \sigma dW(t),\quad X(0) = x_{0}.
@@ -75,39 +75,39 @@
 			\]
 			\item Explain why 
 			\[	\E[X(t)] = e^{-\alpha t}x_{0} + \mu(1 - e^{-\alpha t}).
-				\]
+			\]
 			Hint: What type of stochastic process is $\int_{0}^{t}e^{-\alpha(t - s)}dW(s)$?
 			\item The It\^{o} isometry is a special property that allows the expected value of the product of It\^{o} integrals to be calculated using Riemann integrals instead. That is, for two suitable stochastic processes $X(t)$, $Y(t)$, we have:
 			\[	\E\left[\int_{0}^{t}X(s)dW(s)\int_{0}^{t}Y(s)dW(s)\right]
-				 = \E\left[\int_{0}^{t}X(s)Y(s)ds\right]
-				\]
+			= \E\left[\int_{0}^{t}X(s)Y(s)ds\right]
+			\]
 			Assuming this property holds for $X(t)$, show that
 			\[	\text{Var}[X(t)] = \frac{\sigma^{2}}{2\alpha}(1 - e^{-2\alpha t}).
-				\]
+			\]
 			\item What is it the distribution of $X(t)$? Explain this intuitively.
 			\item Show that for any $s, t\geq 0$:
 			\[	\text{Cov}(X(s), X(t)) = \frac{\sigma^{2}}{2\alpha}(e^{-\alpha|t - s|} - e^{-\alpha(s + t)})
-				\]
+			\]
 		\end{enumerate}
-	\item The price at time $t$ of a put option is given by 
-	\[		p(t, S_t) = Ke^{-r(T - t)}N(-d_{2}) - S_t N(-d_1),
-				\]
-	where
-	\[		d_{1} = \frac{\ln(S_t/ K) + (r + \frac{1}{2}\sigma^2)(T -t)}{\sigma \sqrt{T - t}},\qquad d_{2} = d_{1} - \sigma \sqrt{T - t}.
-			\]
-	Derive the expressions for the replicating portfolio $(\phi(t), \psi(t))$ given that
-	\[		\phi(t) = \frac{\partial p}{\partial S}(t, S_t),\qquad \psi(t)=\frac{p(t, S_t) - S_t \phi(t)}{B(t)}.
-			\]
+		\item The price at time $t$ of a put option is given by 
+		\[		p(t, S_t) = Ke^{-r(T - t)}N(-d_{2}) - S_t N(-d_1),
+		\]
+		where
+		\[		d_{1} = \frac{\ln(S_t/ K) + (r + \frac{1}{2}\sigma^2)(T -t)}{\sigma \sqrt{T - t}},\qquad d_{2} = d_{1} - \sigma \sqrt{T - t}.
+		\]
+		Derive the expressions for the replicating portfolio $(\phi(t), \psi(t))$ given that
+		\[		\phi(t) = \frac{\partial p}{\partial S}(t, S_t),\qquad \psi(t)=\frac{p(t, S_t) - S_t \phi(t)}{B(t)}.
+		\]
 	\end{enumerate}
 	\textbf{Select Answers:}\\
 	1. (b) The Radon-Nikodym derivative is the ratio of the two probabilities;
 	\[	\frac{d\mathcal{Q}}{d\PR} = \begin{cases}
-										4/9 & \quad \text{if }HH\\
-										8/9 & \quad \text{if }HT\\
-										8/9 & \quad \text{if }TH\\
-										16/9 & \quad \text{if }TT\\
-										\end{cases}
-			\] 
+		4/9 & \quad \text{if }HH\\
+		8/9 & \quad \text{if }HT\\
+		8/9 & \quad \text{if }TH\\
+		16/9 & \quad \text{if }TT\\
+	\end{cases}
+	\] 
 	2. (a) $X(t)\quad$ (d) $\mathbb{E}[X^{n}_{t}] = 0$, $\text{Var}[X^{n}_{t}] = \Delta \lfloor t/ \Delta\rfloor\approx t \text{ for $n$ large}\quad$ (e) $\mathcal{N}(0,t)\quad$ (e) Brownian Motion.\\\\
 	4. (d) $\mathcal{N}\left(e^{-\alpha t}x_{0} + \mu(1 - e^{-\alpha t}), \frac{\sigma^{2}}{2\alpha}(1 - e^{-2\alpha t})\right)$
-	\end{document}
+\end{document}
