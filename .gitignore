@@ -45,5 +45,5 @@ vignettes/*.pdf
 *.synctex.gz
 *.out
 
-#Hide Discussion Questions Solution folder
-DQSol/
+# Latex folder
+`Tex Files`/
