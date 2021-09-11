@@ -34,11 +34,11 @@
 
 \begin{document}
 	\maketitle
-	\textbf{NOTE:} This is a condensed version of the cheatsheet with emphasis on formulas and little to no theory. This cheatsheet may be revised throughout the term, please check \url{https://github.com/BrownianNotion/ACTL3182_20T3.git} for the latest version.
+	\textbf{NOTE:} This is a condensed version of the cheatsheet with emphasis on formulas and little to no theory. This cheatsheet may be revised throughout the term, please check \url{https://github.com/BrownianNotion/ACTL3182_21T3.git} for the latest version.
 	\section{Modern Portfolio Theory}
 	\subsection{Utility Theory}
 	\subsubsection{Expected Utility Theorem}
-	Individual prefers \( W_1 \) over \( W_2 \) iff \( \E[U(W_1)] \geq \E[U(W_2)] \)
+		Assuming the utility axioms, \( W_1 \) is preferred over \( W_2 \) iff \( \E[U(W_1)] \geq \E[U(W_2)] \).
 	\subsubsection{Investor types}
 	\begin{center}
 		\def\arraystretch{1.25}
@@ -468,35 +468,40 @@
 	
 	\subsection{Stochastic Calculus} 
 	\subsubsection{Stochastic Differential Equation}
-	Suppose the stochastic process \( X(t) \) can be written as
-	\[	X(t) = x_0 + \int_{0}^{t} a(s) ds + \int_{0}^{t} b(s) dW(s)\]
-	where \( a(\cdot), b(\cdot) \) are appropriate functions (possibly stochastic processes) and \( x_0 \) is a constant.\\
-	This is abbreviated as
-	\[	dX(t) = a(t) dt + b(t) dW(t), \qquad X(0) = x_0.\]
+	Suppose the stochastic process \( X_t \) can be written as
+\[	X_t = x_0 + \int_{0}^{t} a_s ds + \int_{0}^{t} b_s \, dW_s\]
+where \( a(\cdot), b(\cdot) \) are appropriate functions (possibly stochastic processes) and \( x_0 \) is a constant.\\
+This is abbreviated as
+\[	\, dX_t = a_t \, dt + b_t \, dW_t, \qquad X(0) = x_0.\]
+	
 	\subsubsection{It\^{o}'s Lemma}
-	Let \( f(x), F(t, x) \) be deterministic functions with continuous (partial) derivatives up to the second order. Then, 
+	It\^{o}'s Lemma tells us how to differentiate functions of stochastic processes.
+	%just as the chain rule tells us how to differentiate functions of deterministic functions. 
+	\\\\Let \( f(x), F(t, x) \) be deterministic functions with continuous (partial) derivatives up to the second order. Then, 
 	\begin{align*}
-		& df(X(t)) = f'(X(t)) dX(t) + \frac{1}{2}f''(X(t)) dX(t)^2 \\
-		& dF(t, X(t)) = \frac{\partial F}{\partial t}dt + \frac{\partial F}{\partial x} dX(t) + \frac{1}{2}\frac{\partial^2 F}{\partial x^2} dX(t)^2
+		& df(X_t) = f'(X_t) \, dX_t + \frac{1}{2}f''(X_t) \, dX_t^2 \\
+		& dF(t, X_t) = \frac{\partial F}{\partial t}dt + \frac{\partial F}{\partial x} \, dX_t + \frac{1}{2}\frac{\partial^2 F}{\partial x^2} \, dX_t^2
 	\end{align*}
-	It\^{o} multiplication table:
+	In the second equation, all partial derivatives of \( F \) are evaluated at \( (t, X_t) \).\\
+	These equations can be simplified using the following multiplication table:
 	\begin{center}
 		\begin{tabular}{ccc}
-			\( \times \) & \( dt \) & \( dW(t) \)\\
+			\( \times \) & \( dt \) & \( dW_t \)\\
 			\hline
 			\hline
 			\( dt \) & 0 & 0 \\
 			\hline
-			\( dW(t) \) & 0 & dt \\
+			\( dW_t \) & 0 & $dt$ \\
 			\hline
-			\end{tabular}
-		\end{center}
+		\end{tabular}
+	\end{center}
+
 	\subsubsection{Girsanov-Theorem}
-	Suppose \( W(t) \) is a \( \PR \)-Brownian Motion and \( \gamma(\cdot) \) is a pre-visible process. Then there exists an equivalent measure \( \Q \) with Radon-Nikodym derivative 
-	\[	\zeta_t = \exp\left[-\int_{0}^{t}\gamma(s)dW(s) - \frac{1}{2}\int_{0}^{t}\gamma(s)^2 ds\right]
-		\]
-	such that \( W^{Q} \), where
-	\[	W^{\Q}(t) = W(t) + \int_{0}^{t} \gamma(s)ds,\]
+	Suppose \( W_t \) is a \( \PR \)-Brownian Motion and \( \gamma(\cdot) \) is a pre-visible process. Then there exists an equivalent measure \( \Q \) with Radon-Nikodym derivative 
+	\[	\zeta_T = \exp\left[-\int_{0}^{T}\gamma_s\, dW_s - \frac{1}{2}\int_{0}^{T}\gamma_s^2 \, ds\right]
+	\]
+	such that \( W^{Q}_t \), where
+	\[	W^{\Q}_t = W_t + \int_{0}^{t} \gamma_s\, ds,\]
 	is a \( \Q \)-Brownian Motion.
 	
 	\subsection{Black-Scholes-Merton Model}

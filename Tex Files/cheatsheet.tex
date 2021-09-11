@@ -27,18 +27,18 @@
 \titleformat{\subsubsection}{\color{red!50}\normalsize\sffamily\bfseries}{\thesubsubsection}{0.5em}{}
 
 \newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathcal{F}}
 \newcommand{\PR}{\mathbb{P}}
+\renewcommand{\Pr}{\mathbb{P}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Cov}{\operatorname{Cov}}
 \newcommand{\Q}{\mathcal{Q}}
 
 \begin{document}
 	\maketitle
-	\textbf{NOTE:} Theory sections are written to simplify the text for easy revision. Yours answers to exam questions may need to be more detailed than what is written here. This cheatsheet may be revised throughout the term, please check \url{https://github.com/BrownianNotion/ACTL3182_20T3.git} for the latest version.
+	\textbf{NOTE:} Theory sections are written to simplify the text for easy revision. Yours answers to exam questions may need to be more detailed than what is written here. This cheatsheet may be revised throughout the term, please check \url{https://github.com/BrownianNotion/ACTL3182_21T3.git} for the latest version.
 	\section{Modern Portfolio Theory}
 	\subsection{Utility Theory}
-	\subsubsection{Expected Utility Theorem}
-	Individual prefers \( W_1 \) over \( W_2 \) iff \( \E[U(W_1)] \geq \E[U(W_2)] \)
 	\subsubsection{Utility Axioms}
 	The expected utility theorem is a consequence of the following axioms:
 	\begin{enumerate}
@@ -51,6 +51,10 @@
 		\item \textbf{Ranking:} Suppose \( A\succ B\succ D \), \( A\succ C\succ D \), \( B\sim G(A, D;\alpha_1) \) and \( C\sim G(A, D; \alpha_2) \). Then, if \( \alpha_1\geq\alpha_2 \), then \( B\succ C \).
 		\item \textbf{Certainty Equivalent:} All gambles have a price.
 	\end{enumerate}
+
+	\subsubsection{Expected Utility Theorem}
+	Assuming the utility axioms, \( W_1 \) is preferred over \( W_2 \) iff \( \E[U(W_1)] \geq \E[U(W_2)] \)
+	
 	\subsubsection{Non-Satiation}
 	Individuals always prefer more wealth to less: \( U'(w) > 0 \).
 	\subsubsection{Investor types}
@@ -437,9 +441,9 @@
 		}
 		\end{center}
 	The replicating portfolio (stocks, bonds) is:
-	\[	\phi = \frac{f_3 - f_2}{s_3 - s_2},\quad \psi = \frac{1}{B(0)}e^{-r\delta t}(f_3 - \phi s_3)\]
+	\[	\phi = \frac{f_3 - f_2}{s_3 - s_2},\quad \psi = \frac{1}{B_0}e^{-r\delta t}(f_3 - \phi s_3)\]
 	The derivative price today is:
-	\[	V_0 = \phi s_1 + \psi B(0)
+	\[	V_0 = \phi s_1 + \psi B_0
 		\]
 	Rewriting with risk-neutral probabilities:
 	\[	V_0 = e^{-r\delta t}(q f_3 + (1 - q) f_2) = e^{-r\delta t}\E^{\Q}[X] 
@@ -536,7 +540,7 @@
 	\begin{itemize}
 		\item Under risk neutral world, \( \text{price} = \text{discounted expected value of payoff} \).
 		\item Risk preference of investor no longer needs to be considered.
-		\item The real world probabilities of the stock going up or down are no longer needed for pricing.
+		\item We do \textbf{not} use real world probabilities to calculate the price
 		\end{itemize}
 	\newpage
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -548,61 +552,69 @@
 	The Radon-Nikodym Derivative (denoted by \( \zeta \) or \( \frac{d\Q}{d\PR} \)) is a function that allows the interchange between equivalent probability measures. If \( \PR \) and \( \Q \) are equivalent, then for all events \( A \):
 	\[	\Q(A) = \E^{\Q}[1_{A}] = \E^{\PR}\left[\zeta\cdot 1_{A}\right]
 		\]
+		
+	\noindent Furthermore, for any integrable random variable \( X \),
+	\[
+		E^{\Q}[X] = \E^{\Pr}[\zeta X].
+		\]
 	\subsection{Stochastic Processes}
 	%Some concepts in this section are very advanced. For rigorous mathematical definitions, see my FINS4781 notes.
 	\subsubsection{Definition}
-	A stochastic process is a set of random variables \( \{X(t) : t\in \mathcal{I}\} \) where \( \mathcal{I} \) is a usually a time-interval (eg. \( [0, T] \)). Usually, we refer to the process as \( X(t) \) for short.
+	A stochastic process is a set of random variables \( \{X_t : t\in \mathcal{I}\} \) where \( \mathcal{I} \) is a usually a time-interval (eg. \( [0, T] \)). Sometimes bracket notation is used instead - $X(t)$.
 	\subsubsection{Filtration}
-	A filtration \( \mathcal{F}_t \) contains the history of the stochastic process \( X(t) \) up to time \( t \).
+	A filtration \( \mathcal{F}_t \) contains the history of the stochastic process \( X_t \) up to time \( t \).
 	\subsubsection{Martingale}
-	A stochastic process \( M(t) \) is a martingale iff for \( s\leq t \),
-	\[	\E[M(t) | \mathcal{F}_s] = M(s)\]
+	A stochastic process \( M_t \) is a martingale iff for \( s\leq t \),
+	\[	\E[M_t | \mathcal{F}_s] = M_s\]
 	\subsubsection{Brownian Motion}
-	A stochastic process \( W(t) \) is a \( \PR \)-Wiener Process (Brownian Motion) iff under measure \( \PR \):
+	A stochastic process \( W_t \) is a \( \PR \)-Wiener Process (Brownian Motion) iff under measure \( \PR \):
 	\begin{enumerate}
 		\item \( W_0 = 0 \) almost surely
-		\item \( W(t) \) is continuous almost surely
-		\item \( W(t) - W(s) \sim\mathcal{N}(0, t-s) \)
-		\item \( W(t) - W(s) \) is independent of \( \mathcal{F}_s \)
+		\item \( W_t \) is continuous almost surely
+		\item \( W_t - W_s \sim\mathcal{N}(0, t-s) \)
+		\item \( W_t - W_s \) is independent of \( \mathcal{F}_s \)
 	\end{enumerate}
 	\subsection{Stochastic Calculus} 
 	\subsubsection{Stochastic Differential Equation}
-	Suppose the stochastic process \( X(t) \) can be written as
-	\[	X(t) = x_0 + \int_{0}^{t} a(s) ds + \int_{0}^{t} b(s) dW(s)\]
+	Suppose the stochastic process \( X_t \) can be written as
+	\[	X_t = x_0 + \int_{0}^{t} a_s ds + \int_{0}^{t} b_s \, dW_s\]
 	where \( a(\cdot), b(\cdot) \) are appropriate functions (possibly stochastic processes) and \( x_0 \) is a constant.\\
 	This is abbreviated as
-	\[	dX(t) = a(t) dt + b(t) dW(t), \qquad X(0) = x_0.\]
+	\[	\, dX_t = a_t \, dt + b_t \, dW_t, \qquad X(0) = x_0.\]
 	\subsubsection{It\^{o}'s Lemma}
 	It\^{o}'s Lemma tells us how to differentiate functions of stochastic processes.
 	%just as the chain rule tells us how to differentiate functions of deterministic functions. 
 	\\\\Let \( f(x), F(t, x) \) be deterministic functions with continuous (partial) derivatives up to the second order. Then, 
 	\begin{align*}
-		& df(X(t)) = f'(X(t)) dX(t) + \frac{1}{2}f''(X(t)) dX(t)^2 \\
-		& dF(t, X(t)) = \frac{\partial F}{\partial t}dt + \frac{\partial F}{\partial x} dX(t) + \frac{1}{2}\frac{\partial^2 F}{\partial x^2} dX(t)^2
+		& df(X_t) = f'(X_t) \, dX_t + \frac{1}{2}f''(X_t) \, dX_t dX_t \\
+		& dF(t, X_t) = \frac{\partial F}{\partial t}dt + \frac{\partial F}{\partial x} \, dX_t + \frac{1}{2}\frac{\partial^2 F}{\partial x^2} \, dX_t dX_t.
 	\end{align*}
-	In the second equation, all partial derivatives of \( F \) are evaluated at \( (t, X(t)) \).\\
+	In the second equation, all partial derivatives of \( F \) are evaluated at \( (t, X_t) \).\\
 	These equations can be simplified using the following multiplication table:
 	\begin{center}
 		\begin{tabular}{ccc}
-			\( \times \) & \( dt \) & \( dW(t) \)\\
+			\( \times \) & \( dt \) & \( dW_t \)\\
 			\hline
 			\hline
 			\( dt \) & 0 & 0 \\
 			\hline
-			\( dW(t) \) & 0 & $dt$ \\
+			\( dW_t \) & 0 & $dt$ \\
 			\hline
 			\end{tabular}
 		\end{center}
-	\subsubsection{Radon-Nikodym Derivative}
-	For stochastic processes, the Radon-Nikodym Derivative becomes a stochastic process \( \zeta_t \) (specifically, a martingale). For all events \( A\in\mathcal{F}_t \),
-	\[	\Q(A) = \E^{\Q}[1_{A}] = \E^{\PR}[\zeta_t \cdot1_{A}]\]
+	\subsubsection{Radon-Nikodym Derivative Process}
+	The Radon-Nikodym Derivative process allows the interchange between equivalent probability measures when dealing with \textbf{conditional} expectations. Defining \( \zeta_t = \E^{\Pr}[\frac{d\Q}{d\Pr}|\mathcal{F}_t]\). For any integrable random variable \( X \) and \( 0\leq t\leq T \),
+	\[
+		\E^{\Q}[X|\F_t] = \frac{\E^{\Pr}[X\zeta_T|\F_t]}{\zeta_t},
+		\]
+	where the above represents an `abstract' Bayes formula.
 	\subsubsection{Girsanov-Theorem}
 	Girsanov's Theorem will help us obtain the stochastic differential equation for a stock under a different measure.\\\\
-	Suppose \( W(t) \) is a \( \PR \)-Brownian Motion and \( \gamma(\cdot) \) is a pre-visible process. Then there exists an equivalent measure \( \Q \) with Radon-Nikodym derivative 
-	\[	\zeta_t = \exp\left[-\int_{0}^{t}\gamma(s)dW(s) - \frac{1}{2}\int_{0}^{t}\gamma(s)^2 ds\right]
+	Suppose \( W_t \) is a \( \PR \)-Brownian Motion and \( \gamma(\cdot) \) is a pre-visible process. Then there exists an equivalent measure \( \Q \) with Radon-Nikodym derivative 
+	\[	\zeta_T = \exp\left[-\int_{0}^{T}\gamma_s\, dW_s - \frac{1}{2}\int_{0}^{T}\gamma_s^2 \, ds\right]
 		\]
-	such that \( W^{Q}(t) \), where
-	\[	W^{\Q}(t) = W(t) + \int_{0}^{t} \gamma(s)ds,\]
+	such that \( W^{Q}_t \), where
+	\[	W^{\Q}_t = W_t + \int_{0}^{t} \gamma_s\, ds,\]
 	is a \( \Q \)-Brownian Motion.
 	\subsection{Pricing Framework}
 	\subsubsection{Fundamental Theorem of Asset Pricing}
@@ -610,14 +622,14 @@
 	\subsubsection{Pricing Framework Summary}
 	The following steps give a rigorous justification for derivative pricing under \( \Q \).
 	\begin{enumerate}
-		\item Identify a measure \( \Q \) where the discounted stock process \( Z(t) = S(t)/B(t) \) is a \( \Q \)-martingale.
-		\item Let \( Y(t) = \E^{\Q}\left[X/B(T)|\mathcal{F}_t\right] \). Under \( \Q \), \( Y(t) \) and \( Z(t) \) are martingales so by the martingale representation theorem, there exists a pre-visible process \( \phi \) such that
-		\[	Y(t) = Y(0) + \int_{0}^{t}\phi(s)dZ(s) 
+		\item Identify a measure \( \Q \) where the discounted stock process \( Z_t = S_t/B_t \) is a \( \Q \)-martingale.
+		\item Let \( Y_t = \E^{\Q}\left[X/B_T|\mathcal{F}_t\right] \). Under \( \Q \), \( Y_t \) and \( Z_t \) are martingales so by the martingale representation theorem, there exists a pre-visible process \( \phi \) such that
+		\[	Y_t = Y_0 + \int_{0}^{t}\phi_s\, dZ_s 
 		   \]
-		\item Construct a portfolio \( \phi(t) \) units of Stock and \( \psi(t) := Y(t) - \phi(t)Z(t) \) dollars of Bond.
-		\item The portfolio \( (\phi(t), \psi(t)) \) is self-financing and has the same payoff as the derivative at maturity.
+		\item Construct a portfolio \( \phi_t \) units of Stock and \( \psi_t := Y_t - \phi_t Z_t \) dollars of Bond.
+		\item The portfolio \( (\phi_t, \psi_t) \) is self-financing and has the same payoff as the derivative at maturity.
 		\item By the Law of One Price, the prices must match at \( t = 0 \) so
-		\[	\text{Price} = \E^{\Q}[X/B(T)]
+		\[	\text{Price} = \E^{\Q}[X/B_T]
 			\]
 	\end{enumerate}
 	\subsection{Black-Scholes-Merton Model}
@@ -629,56 +641,56 @@
 		\item The underlying stock does not pay dividends.
 		\item The stock process follows a Geometric Brownian Motion
 		\begin{align*}
-			&S(t) = S_0 e^{\left(\mu - \frac{1}{2} \sigma^2\right)t + W(t)}
-			%\exp\left[\left(\mu - \frac{1}{2}\sigma^2\right)t + \sigma W(t)\right]
+			&S_t = S_0 e^{\left(\mu - \frac{1}{2} \sigma^2\right)t + W_t}
+			%\exp\left[\left(\mu - \frac{1}{2}\sigma^2\right)t + \sigma W_t\right]
 			\\[4pt]
-			\iff &dS(t) = \mu S(t) dt + \sigma S(t) dW(t)
+			\iff &dS_t = \mu S_t \, dt + \sigma S_t dW_t
 		\end{align*}
 		\item The option is European
 	\end{enumerate}
 	\subsubsection{Put and Call Formulas}
-	%Consider options with underlying stock \( S(t) \), maturity \( T \) and strike price \( K \). 
+	%Consider options with underlying stock \( S_t \), maturity \( T \) and strike price \( K \). 
 	Define:
 	\begin{align*}
-		d_1 = \frac{\ln\left(S(t)/ K\right) +\left(r + \frac{1}{2}\sigma^2\right)(T - t)}{\sigma\sqrt{T - t}},\qquad d_2 
-		%= \frac{\ln\left(S(t)/ K\right) +\left(r - \frac{1}{2}\sigma^2\right)(T - t)}{\sigma\sqrt{T - t}} 
+		d_1 = \frac{\ln\left(S_t/ K\right) +\left(r + \frac{1}{2}\sigma^2\right)(T - t)}{\sigma\sqrt{T - t}},\qquad d_2 
+		%= \frac{\ln\left(S_t/ K\right) +\left(r - \frac{1}{2}\sigma^2\right)(T - t)}{\sigma\sqrt{T - t}} 
 		= d_1 - \sigma\sqrt{T - t}
 	\end{align*}
 	Then,
 	\begin{align*}
-		& c_t = S(t)N(d_1) - Ke^{-r(T - t)}N(d_2)\\[4pt]
+		& c_t = S_tN(d_1) - Ke^{-r(T - t)}N(d_2)\\[4pt]
 		& p_t = Ke^{-r(T - t)}N(-d_2) - S_t N(-d_1),
 	\end{align*}
 	where \( N(\cdot) \) is the cdf of the standard normal distribution.
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Term Structure Modelling and Asset-Liability Management}
 	\subsection{Short-Rate Models}
-	%Merton Model: \( dr(t) = \alpha dt + \sigma dW(t) \)\\
-	%Vasicek Model: \( dr(t) = \alpha (\mu - r(t)) dt + \sigma dW(t) \)\\
-	%Cox-Ingersoll-Ross (CIR) Model: \( dr(t) = \alpha(\mu - r(t))dt + \sigma\sqrt{r(t)} dW(t) \)\\
-	%Hull-White Model: \( dr(t) = \alpha(t)(\mu(t) - r(t))dt + \sigma(t)dW(t) \)
+	%Merton Model: \( dr_t = \alpha \, dt + \sigma dW_t \)\\
+	%Vasicek Model: \( dr_t = \alpha (\mu - r_t) \, dt + \sigma dW_t \)\\
+	%Cox-Ingersoll-Ross (CIR) Model: \( dr_t = \alpha(\mu - r_t)\, dt + \sigma\sqrt{r_t} dW_t \)\\
+	%Hull-White Model: \( dr_t = \alpha_t(\mu_t - r_t)\, dt + \sigma_tdW_t \)
 	\subsubsection{Merton Model:}
 	\[	
-		dr(t) = \alpha dt + \sigma dW(t)
+		dr_t = \alpha \, dt + \sigma dW_t
 			\]
 	\begin{itemize}
 		\item Tractable
-		\item \( r(t) \) and \(\int_{0}^{t} r(s)ds \) are normally distributed.
+		\item \( r_t \) and \(\int_{0}^{t} r_sds \) are normally distributed.
 		\item Unrealistic (no mean-reversion and allows negative values)
 		\end{itemize}
 	
 	\subsubsection{Vasicek Model:}
-	\[	dr(t) = \alpha \left[\mu - r(t)\right] dt + \sigma dW(t)
+	\[	dr_t = \alpha \left[\mu - r_t\right] \, dt + \sigma dW_t
 		\]
 	\begin{itemize}
 		\item Mean-Reverting
-		\item \( r(t) \) and \(\int_{0}^{t} r(s)ds \) are normally distributed.
+		\item \( r_t \) and \(\int_{0}^{t} r_sds \) are normally distributed.
 		\item Still allows negative values.
 		\end{itemize}
 	
 	\subsubsection{Hull White Model:}
 	\[	
-	dr(t) = \alpha(t)\left[\mu(t) - r(t)\right]dt + \sigma(t)dW(t)
+	dr_t = \alpha_t\left[\mu_t - r_t\right]\, dt + \sigma_tdW_t
 	\]
 	\begin{itemize}
 		\item Generalised version of Vasicek-Model
@@ -686,11 +698,11 @@
 	\end{itemize}
 
 	\subsubsection{CIR Model:}
-	\[	dr(t) = \alpha\left[\mu - r(t)\right]dt + \sigma\sqrt{r(t)} dW(t)
+	\[	dr_t = \alpha\left[\mu - r_t\right]\, dt + \sigma\sqrt{r_t} dW_t
 		\]
 		\begin{itemize}
 		\item Mean-Reverting
-		\item Square root term keeps \( r(t) \) positive
+		\item Square root term keeps \( r_t \) positive
 	\end{itemize}
 	\subsection{Ho-Lee Model}
 	\subsubsection{Definition}
