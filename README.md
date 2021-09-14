@@ -12,7 +12,7 @@ Additional Tutorial Material for ACTL3182 2021 T3. Currently contains:
 * Module 4 simulation of Brownian Motion and Geometric Brownian Motion
 * Module 5 simulation of stochastic short rate models  
 
-## Onenote Links
+## Onenote Links for online tutorials
 
 > [**ACTL3182 (2021)**](https://unsw-my.sharepoint.com/:o:/g/personal/z5163239_ad_unsw_edu_au/EvzRfcdyLiFMkK9NxDuUOgYByTsgYwbifhQnU75sxaaj2A?e=EAfH3w)  
 
