@@ -468,21 +468,18 @@
 	
 	\subsection{Stochastic Calculus} 
 	\subsubsection{Stochastic Differential Equation}
-	Suppose the stochastic process \( X_t \) can be written as
+	Suppose the stochastic process \( X \) can be written as
 \[	X_t = x_0 + \int_{0}^{t} a_s ds + \int_{0}^{t} b_s \, dW_s\]
 where \( a(\cdot), b(\cdot) \) are appropriate functions (possibly stochastic processes) and \( x_0 \) is a constant.\\
 This is abbreviated as
 \[	\, dX_t = a_t \, dt + b_t \, dW_t, \qquad X(0) = x_0.\]
 	
 	\subsubsection{It\^{o}'s Lemma}
-	It\^{o}'s Lemma tells us how to differentiate functions of stochastic processes.
-	%just as the chain rule tells us how to differentiate functions of deterministic functions. 
-	\\\\Let \( f(x), F(t, x) \) be deterministic functions with continuous (partial) derivatives up to the second order. Then, 
+	Let \( f(x), F(t, x) \) be deterministic functions with continuous (partial) derivatives up to the second order. Then, 
 	\begin{align*}
-		& df(X_t) = f'(X_t) \, dX_t + \frac{1}{2}f''(X_t) \, dX_t^2 \\
-		& dF(t, X_t) = \frac{\partial F}{\partial t}dt + \frac{\partial F}{\partial x} \, dX_t + \frac{1}{2}\frac{\partial^2 F}{\partial x^2} \, dX_t^2
+	& df(X_t) = f'(X_t) \, dX_t + \frac{1}{2}f''(X_t) \, dX_t dX_t \\
+	& dF(t, X_t) = \frac{\partial F}{\partial t}(t, X_t)\, dt + \frac{\partial F}{\partial x}(t, X_t) \, dX_t + \frac{1}{2}\frac{\partial^2 F}{\partial x^2}(t, X_t) \, dX_t dX_t.
 	\end{align*}
-	In the second equation, all partial derivatives of \( F \) are evaluated at \( (t, X_t) \).\\
 	These equations can be simplified using the following multiplication table:
 	\begin{center}
 		\begin{tabular}{ccc}
@@ -497,10 +494,10 @@ This is abbreviated as
 	\end{center}
 
 	\subsubsection{Girsanov-Theorem}
-	Suppose \( W_t \) is a \( \PR \)-Brownian Motion and \( \gamma(\cdot) \) is a pre-visible process. Then there exists an equivalent measure \( \Q \) with Radon-Nikodym derivative 
+	Suppose \( W \) is a \( \PR \)-Brownian Motion and \( \gamma(\cdot) \) is a pre-visible process. Then there exists an equivalent measure \( \Q \) with Radon-Nikodym derivative 
 	\[	\zeta_T = \exp\left[-\int_{0}^{T}\gamma_s\, dW_s - \frac{1}{2}\int_{0}^{T}\gamma_s^2 \, ds\right]
 	\]
-	such that \( W^{Q}_t \), where
+	such that \( W^{Q} \), where
 	\[	W^{\Q}_t = W_t + \int_{0}^{t} \gamma_s\, ds,\]
 	is a \( \Q \)-Brownian Motion.
 	
@@ -508,22 +505,22 @@ This is abbreviated as
 	\subsubsection{Stock Process}
 	The stock process follows a Geometric Brownian Motion
 	\begin{align*}
-	&S(t) = S_0 e^{\left(\mu - \frac{1}{2} \sigma^2\right)t + W(t)}
-	%\exp\left[\left(\mu - \frac{1}{2}\sigma^2\right)t + \sigma W(t)\right]
+	&S_t = S_0 e^{\left(\mu - \frac{1}{2} \sigma^2\right)t + W_t}
+	%\exp\left[\left(\mu - \frac{1}{2}\sigma^2\right)t + \sigma W_t\right]
 	\\[4pt]
-	\iff &dS(t) = \mu S(t) dt + \sigma S(t) dW(t)
+	\iff &dS_t = \mu S_t dt + \sigma S_t dW_t
 	\end{align*}
 	\subsubsection{Put and Call Formulas}
-	%Consider options with underlying stock \( S(t) \), maturity \( T \) and strike price \( K \). 
+	%Consider options with underlying stock \( S_t \), maturity \( T \) and strike price \( K \). 
 	Define:
 	\begin{align*}
-		d_1 = \frac{\ln\left(S(t)/ K\right) +\left(r + \frac{1}{2}\sigma^2\right)(T - t)}{\sigma\sqrt{T - t}},\qquad d_2 
-		%= \frac{\ln\left(S(t)/ K\right) +\left(r - \frac{1}{2}\sigma^2\right)(T - t)}{\sigma\sqrt{T - t}} 
+		d_1 = \frac{\ln\left(S_t/ K\right) +\left(r + \frac{1}{2}\sigma^2\right)(T - t)}{\sigma\sqrt{T - t}},\qquad d_2 
+		%= \frac{\ln\left(S_t/ K\right) +\left(r - \frac{1}{2}\sigma^2\right)(T - t)}{\sigma\sqrt{T - t}} 
 		= d_1 - \sigma\sqrt{T - t}
 	\end{align*}
 	Then,
 	\begin{align*}
-		& c_t = S(t)N(d_1) - Ke^{-r(T - t)}N(d_2)\\[4pt]
+		& c_t = S_tN(d_1) - Ke^{-r(T - t)}N(d_2)\\[4pt]
 		& p_t = Ke^{-r(T - t)}N(-d_2) - S_t N(-d_1),
 	\end{align*}
 	where \( N(\cdot) \) is the cdf of the standard normal distribution.
@@ -531,26 +528,26 @@ This is abbreviated as
 	\newpage
 	\section{Term Structure Modelling and Asset-Liability Management}
 	\subsection{Short-Rate Models}
-	%Merton Model: \( dr(t) = \alpha dt + \sigma dW(t) \)\\
-	%Vasicek Model: \( dr(t) = \alpha (\mu - r(t)) dt + \sigma dW(t) \)\\
-	%Cox-Ingersoll-Ross (CIR) Model: \( dr(t) = \alpha(\mu - r(t))dt + \sigma\sqrt{r(t)} dW(t) \)\\
-	%Hull-White Model: \( dr(t) = \alpha(t)(\mu(t) - r(t))dt + \sigma(t)dW(t) \)
+	%Merton Model: \( dr_t = \alpha dt + \sigma dW_t \)\\
+	%Vasicek Model: \( dr_t = \alpha (\mu - r_t) dt + \sigma dW_t \)\\
+	%Cox-Ingersoll-Ross (CIR) Model: \( dr_t = \alpha(\mu - r_t)dt + \sigma\sqrt{r_t} dW_t \)\\
+	%Hull-White Model: \( dr_t = \alpha_t(\mu_t - r_t)dt + \sigma_tdW_t \)
 	\subsubsection{Merton Model:}
 	\[	
-		dr(t) = \alpha dt + \sigma dW(t)
+		dr_t = \alpha dt + \sigma dW_t
 			\]
 
 	\subsubsection{Hull White Model:}
 	\[	
-		dr(t) = \alpha(t)(\mu(t) - r(t))dt + \sigma(t)dW(t)
+		dr_t = \alpha_t(\mu_t - r_t)dt + \sigma_tdW_t
 		\]
 	
 	\subsubsection{Vasicek Model:}
-	\[	dr(t) = \alpha (\mu - r(t)) dt + \sigma dW(t)
+	\[	dr_t = \alpha (\mu - r_t) dt + \sigma dW_t
 		\]
 
 	\subsubsection{CIR Model:}
-	\[	dr(t) = \alpha(\mu - r(t))dt + \sigma\sqrt{r(t)} dW(t)
+	\[	dr_t = \alpha(\mu - r_t)dt + \sigma\sqrt{r_t} dW_t
 		\]
 	
 	\subsection{Ho-Lee Model}

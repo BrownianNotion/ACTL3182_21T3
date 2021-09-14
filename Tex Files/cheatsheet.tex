@@ -555,19 +555,19 @@
 		
 	\noindent Furthermore, for any integrable random variable \( X \),
 	\[
-		E^{\Q}[X] = \E^{\Pr}[\zeta X].
+		\E^{\Q}[X] = \E^{\Pr}[\zeta X].
 		\]
 	\subsection{Stochastic Processes}
 	%Some concepts in this section are very advanced. For rigorous mathematical definitions, see my FINS4781 notes.
 	\subsubsection{Definition}
-	A stochastic process is a set of random variables \( \{X_t : t\in \mathcal{I}\} \) where \( \mathcal{I} \) is a usually a time-interval (eg. \( [0, T] \)). Sometimes bracket notation is used instead - $X(t)$.
+	A stochastic process is a set of random variables \( \{X_t : t\in \mathcal{I}\} \) where \( \mathcal{I} \) is a usually a time-interval (eg. \( [0, T] \)). We usually abbreviate the process by the capital letter \( X:= \{X_t:t\in\mathcal{I}\} \).
 	\subsubsection{Filtration}
-	A filtration \( \mathcal{F}_t \) contains the history of the stochastic process \( X_t \) up to time \( t \).
+	A filtration \( \{\mathcal{F}_t:t\in\mathcal{I}\} \) is a set of information sets where \( \F_s\subseteq \F_t \) for \( s\leq t \) and \( \F_t \) contains the history of the process \( X_t \) up to time \( t \).
 	\subsubsection{Martingale}
-	A stochastic process \( M_t \) is a martingale iff for \( s\leq t \),
+	A stochastic process \( M \) is a martingale if for \( s\leq t \),
 	\[	\E[M_t | \mathcal{F}_s] = M_s\]
 	\subsubsection{Brownian Motion}
-	A stochastic process \( W_t \) is a \( \PR \)-Wiener Process (Brownian Motion) iff under measure \( \PR \):
+	A stochastic process \( W \) is a \( \PR \)-Wiener Process (Brownian Motion) iff under measure \( \PR \):
 	\begin{enumerate}
 		\item \( W_0 = 0 \) almost surely
 		\item \( W_t \) is continuous almost surely
@@ -576,20 +576,19 @@
 	\end{enumerate}
 	\subsection{Stochastic Calculus} 
 	\subsubsection{Stochastic Differential Equation}
-	Suppose the stochastic process \( X_t \) can be written as
+	Suppose the stochastic process \( X \) can be written as
 	\[	X_t = x_0 + \int_{0}^{t} a_s ds + \int_{0}^{t} b_s \, dW_s\]
 	where \( a(\cdot), b(\cdot) \) are appropriate functions (possibly stochastic processes) and \( x_0 \) is a constant.\\
 	This is abbreviated as
-	\[	\, dX_t = a_t \, dt + b_t \, dW_t, \qquad X(0) = x_0.\]
+	\[	\, dX_t = a_t \, dt + b_t \, dW_t, \qquad X(0) = x_0\]
+	and \( X \) is called an \textbf{It\^{o} process}.
 	\subsubsection{It\^{o}'s Lemma}
-	It\^{o}'s Lemma tells us how to differentiate functions of stochastic processes.
-	%just as the chain rule tells us how to differentiate functions of deterministic functions. 
-	\\\\Let \( f(x), F(t, x) \) be deterministic functions with continuous (partial) derivatives up to the second order. Then, 
+	It\^{o}'s Lemma tells us that smooth functions of It\^{o} processes are also It\^{o} processes as well as how they can be decomposed into a \( ds \) and \( dW_s \) integral term. \\\\
+	\noindent Specifically, if \( f(x), F(t, x) \) are deterministic functions with continuous (partial) derivatives up to the second order, then
 	\begin{align*}
 		& df(X_t) = f'(X_t) \, dX_t + \frac{1}{2}f''(X_t) \, dX_t dX_t \\
-		& dF(t, X_t) = \frac{\partial F}{\partial t}dt + \frac{\partial F}{\partial x} \, dX_t + \frac{1}{2}\frac{\partial^2 F}{\partial x^2} \, dX_t dX_t.
+		& dF(t, X_t) = \frac{\partial F}{\partial t}(t, X_t)\, dt + \frac{\partial F}{\partial x}(t, X_t) \, dX_t + \frac{1}{2}\frac{\partial^2 F}{\partial x^2}(t, X_t) \, dX_t dX_t.
 	\end{align*}
-	In the second equation, all partial derivatives of \( F \) are evaluated at \( (t, X_t) \).\\
 	These equations can be simplified using the following multiplication table:
 	\begin{center}
 		\begin{tabular}{ccc}
@@ -603,40 +602,40 @@
 			\end{tabular}
 		\end{center}
 	\subsubsection{Radon-Nikodym Derivative Process}
-	The Radon-Nikodym Derivative process allows the interchange between equivalent probability measures when dealing with \textbf{conditional} expectations. Defining \( \zeta_t = \E^{\Pr}[\frac{d\Q}{d\Pr}|\mathcal{F}_t]\). For any integrable random variable \( X \) and \( 0\leq t\leq T \),
+	The Radon-Nikodym Derivative process allows the interchange between equivalent probability measures when dealing with \textbf{conditional} expectations. Define \( \zeta_t = \E^{\Pr}[\frac{d\Q}{d\Pr}|\mathcal{F}_t]\). For any integrable random variable \( X \) and \( 0\leq t\leq T \),
 	\[
 		\E^{\Q}[X|\F_t] = \frac{\E^{\Pr}[X\zeta_T|\F_t]}{\zeta_t},
 		\]
-	where the above represents an `abstract' Bayes formula.
+	where the above is an `abstract' Bayes formula.
 	\subsubsection{Girsanov-Theorem}
-	Girsanov's Theorem will help us obtain the stochastic differential equation for a stock under a different measure.\\\\
-	Suppose \( W_t \) is a \( \PR \)-Brownian Motion and \( \gamma(\cdot) \) is a pre-visible process. Then there exists an equivalent measure \( \Q \) with Radon-Nikodym derivative 
+	Girsanov's Theorem allows us to obtain the stochastic differential equation for a stock under an different but equivalent measure.\\\\
+	Suppose \( W \) is a \( \PR \)-Brownian Motion and \( \gamma(\cdot) \) is a pre-visible process. Then there exists an equivalent measure \( \Q \) with Radon-Nikodym derivative 
 	\[	\zeta_T = \exp\left[-\int_{0}^{T}\gamma_s\, dW_s - \frac{1}{2}\int_{0}^{T}\gamma_s^2 \, ds\right]
 		\]
-	such that \( W^{Q}_t \), where
-	\[	W^{\Q}_t = W_t + \int_{0}^{t} \gamma_s\, ds,\]
-	is a \( \Q \)-Brownian Motion.
+	such that the process \( W^{Q} \)is a \( \Q \)-Brownian Motion, where
+	\[	W^{\Q}_t = W_t + \int_{0}^{t} \gamma_s\, ds.\]
 	\subsection{Pricing Framework}
 	\subsubsection{Fundamental Theorem of Asset Pricing}
-	The market has \textbf{no arbitrage} iff there exists an \textbf{equivalent martingale measure} \( \Q \) under which \textbf{discounted stock processes are martingales}. \( \Q \) is also called the risk-neutral measure.
+	The market has \textbf{no arbitrage} iff there exists a (unique) \textbf{equivalent martingale measure} \( \Q \) under which \textbf{discounted stock processes are martingales}. \( \Q \) is also called the risk-neutral measure.
 	\subsubsection{Pricing Framework Summary}
 	The following steps give a rigorous justification for derivative pricing under \( \Q \).
 	\begin{enumerate}
-		\item Identify a measure \( \Q \) where the discounted stock process \( Z_t = S_t/B_t \) is a \( \Q \)-martingale.
-		\item Let \( Y_t = \E^{\Q}\left[X/B_T|\mathcal{F}_t\right] \). Under \( \Q \), \( Y_t \) and \( Z_t \) are martingales so by the martingale representation theorem, there exists a pre-visible process \( \phi \) such that
-		\[	Y_t = Y_0 + \int_{0}^{t}\phi_s\, dZ_s 
+		\item Identify a measure \( \Q \) where the discounted stock process \( Z \) given by \( Z_t = S_t/B_t \) is a \( \Q \)-martingale.
+		\item Let \( Y_t = \E^{\Q}\left[X/B_T|\mathcal{F}_t\right] \). Under \( \Q \), \( Y \) and \( Z \) are martingales so by the martingale representation theorem, there exists a pre-visible process \( \phi \) such that
+		\[	Y_t = Y_0 + \int_{0}^{t}\phi_s\, dZ_s.
 		   \]
 		\item Construct a portfolio \( \phi_t \) units of Stock and \( \psi_t := Y_t - \phi_t Z_t \) dollars of Bond.
 		\item The portfolio \( (\phi_t, \psi_t) \) is self-financing and has the same payoff as the derivative at maturity.
-		\item By the Law of One Price, the prices must match at \( t = 0 \) so
-		\[	\text{Price} = \E^{\Q}[X/B_T]
+		\item By the Law of One Price, the prices must match at all times \( 0\leq t\leq T \), so
+		\[	\text{Price}_t = \E^{\Q}[X \cdot B_t/B_T|\F_t].
 			\]
+		 In other words, the price is the discounted expected value under measure \( \Q \), taking into account current information \( \F_t \).
 	\end{enumerate}
 	\subsection{Black-Scholes-Merton Model}
 	\subsubsection{Assumptions}
 	\begin{enumerate}
 		\item No arbitrage
-		\item Unlimited borrowing at the risk-free rate \( r \)
+		\item Unlimited borrowing and lending at the risk-free rate \( r \)
 		\item No Market frictions (eg. short selling restrictions, transaction fees)
 		\item The underlying stock does not pay dividends.
 		\item The stock process follows a Geometric Brownian Motion
