@@ -226,7 +226,7 @@
 	\subsubsection{Types of market efficiency}
 	\begin{enumerate}
 		\item Strong form: Market prices reflect all information including insider information.
-		\item Semi-strong form: Market prices reflect all publicly available information %(fundamental and technical analysis are useless).
+		\item Semi-strong form: Market prices reflect all publicly available information %(ttal and technical analysis are useless).
 		\item Weak form: Market prices reflect all historical data 
 		%(technical analysis is useless).
 	\end{enumerate}
@@ -615,8 +615,9 @@
 	such that the process \( W^{Q} \)is a \( \Q \)-Brownian Motion, where
 	\[	W^{\Q}_t = W_t + \int_{0}^{t} \gamma_s\, ds.\]
 	\subsection{Pricing Framework}
-	\subsubsection{Fundamental Theorem of Asset Pricing}
-	The market has \textbf{no arbitrage} iff there exists a (unique) \textbf{equivalent martingale measure} \( \Q \) under which \textbf{discounted stock processes are martingales}. \( \Q \) is also called the risk-neutral measure.
+	\subsubsection{No arbitrage and the Risk-Neutral Measure}
+	The market has \textbf{no arbitrage} if there exists a \textbf{equivalent martingale measure} \( \Q \) under which \textbf{discounted stock processes are martingales}. \( \Q \) is also called the risk-neutral measure. \\
+	When stocks follow a single Brownian motion (eg. in Black-Scholes), the market is complete and the martingale measure is unique.
 	\subsubsection{Pricing Framework Summary}
 	The following steps give a rigorous justification for derivative pricing under \( \Q \).
 	\begin{enumerate}
