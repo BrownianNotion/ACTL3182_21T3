@@ -17,7 +17,7 @@
 \cfoot{Page \thepage}  %PERHAPS Add UNSW COPYRIGHT FOOTER
 \setlength{\headheight}{17pt} 
 
-\title{\textbf{ACTL3182 Module 4 Extra Questions: Radon-Nikodym Theorem, Martingale and It\^o's Lemma}}
+\title{\textbf{ACTL3182 Module 3 and 4 Extra Questions: Radon-Nikodym Theorem, Martingales and It\^o's Lemma}}
 \author{Andrew Wu}
 \date{October 2020}
 
@@ -26,19 +26,17 @@
 \newcommand{\PR}{\mathbb{P}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Var}{\operatorname{Var}}
 \newcommand{\Q}{\mathcal{Q}}
 
 \begin{document}
 	\maketitle
+	Unless stated otherwise, all processes should use their natural filtration.
 	\begin{enumerate}
-		\item Consider two independent coin flips; that is let the sample space be $\Omega:=\{HH, HT, TH, TT\}$. Under the $\PR$ measure, the coin is fair. Under the $\Q$ measure, the coin has a probability of $\frac{1}{3}$ of landing on heads on each flip. 
-		\begin{enumerate}
-			\item Find the probability of each scenario under $\PR$ and $\Q$.
-			\item Find the Radon-Nikodym Derivative $\frac{d\Q}{d\PR}$.
-			\item Show that for the event $A$, where $A$ represents getting a head on the first flip, that
-			\[	\Q(A) = \E_{P}\left[\frac{d\Q}{d\PR}1_{A}\right]
+		\item Let \( X:=(X_n)_{n=1,2,\ldots} \) be a (discrete-time) martingale with respect to filtration \( (\mathcal{F}_n)_{n=1,2,\ldots} \). Show that \( X \) is a martingale \textbf{if and only if} 
+		\[
+			\E[X_n |\mathcal{F}_n] = \E[X_{n+1}|\mathcal{F}_n] = X_n.
 			\]
-		\end{enumerate}
 		\item Consider the stochastic process 
 		\[	X_n = \sum_{k=1}^{n}Z_{k},\quad X(0) = 0
 		\]
@@ -48,13 +46,62 @@
 			-1 & \quad \text{w.p. } \frac{1}{2}.
 		\end{cases}
 		\]
-		\begin{enumerate}
-			\item What is $\E[X_{n+1}|\mathcal{F}_{n}]$?
-			\item Briefly explain why $X_n$ is a martingale.
-			\item Now consider a time interval $[0, T]$ and divide the interval into $n$ equal subintervals of length $\Delta = T/n$. Let $X_t^{n}$ be the process
-			\[	X_t^{n} = \sqrt{\Delta}\sum_{k=1}^{\lfloor t/\Delta \rfloor}Z_{k}, \quad \text{for } 0\leq t\leq T. 
+		Show that \( X \) is a martingale.
+		\item Consider the stochastic process 
+		\[
+			X_n = \prod_{k=1}^{n}Z_{k},\quad X(0) = 1
 			\]
-			
+		where $Z_{k}$, $k=1,2,...n$ are iid with distribution 
+		\[	Z_{k} = \begin{cases}
+			2 &  \quad \text{w.p. } p \\
+			\frac{1}{2} & \quad \text{w.p. } 1-p.
+		\end{cases}
+		\]
+		Find the probability \( p \) such that \( X \) is a martingale.
+		
+		\item Consider the stochastic processes \( X, Y \) defined by:
+		\[	X_n = \sum_{k=1}^{n}Z_{k},\quad X(0) = 0
+		\]
+		where $Z_{k}$, $k=1,2,...n$ are iid with distribution 
+		\[	Z_{k} = \begin{cases}
+			+1 &  \quad \text{w.p. } 0.6 \\
+			-1 & \quad \text{w.p. } 0.4.
+		\end{cases}
+		\]
+		and 
+		\[
+		Y_n = Y_{n-1} + IY_{n-2},\qquad Y_0 = Y_1 = 0,
+		\]
+		where \( I \) is independent of \( Y_n \) for every \( n=0,1,\ldots \) and 
+		\[
+		I = \begin{cases}
+			+1 &  \quad \text{w.p. } \frac{1}{2} \\
+			-1 & \quad \text{w.p. } \frac{1}{2}.
+		\end{cases}
+		\]
+		\begin{enumerate}
+			\item Explain why \( X \) is a Markov process but not a martingale.
+			\item Explain why \( Y \) is a martingale but not a Markov process.
+		\end{enumerate}
+		\item Consider two independent coin flips; that is let the sample space be $\Omega:=\{HH, HT, TH, TT\}$. Under the $\PR$ measure, the coin is fair. Under the $\Q$ measure, the coin has a probability of $\frac{1}{3}$ of landing on heads on each flip. 
+		\begin{enumerate}
+			\item Find the probability of each scenario under $\PR$ and $\Q$.
+			\item Find the Radon-Nikodym Derivative $\frac{d\Q}{d\PR}$.
+			\item Show that for the event $A$, where $A$ represents getting a head on the first flip, that
+			\[	\Q(A) = \E_{P}\left[\frac{d\Q}{d\PR}1_{A}\right]
+			\]
+		\end{enumerate}
+		\item The following question works with a scaled version of the random walk process in question 2:
+		\begin{enumerate}
+			\item Consider a time interval $[0, T]$ and divide the interval into $n$ equal subintervals of length $\Delta = T/n$. Let $(X_t^{n})_{t\in[0,T]}$ be the process
+			\[	X_t^{n} = \sqrt{\Delta}\sum_{k=1}^{\lfloor t/\Delta \rfloor}Z_{k}, \quad \text{for } 0\leq t\leq T,
+			\]
+			where $Z_{k}$, $k=1,2,...n$ are iid with distribution 
+			\[	Z_{k} = \begin{cases}
+				+1 &  \quad \text{w.p. } \frac{1}{2} \\
+				-1 & \quad \text{w.p. } \frac{1}{2}.
+			\end{cases}
+			\]
 			Draw a possible graph of $X^{n}_{t}$ for $n=1,2$. What happens as $n\to\infty$?
 			\item Calculate $\E[X^{n}_{t}]$ and $\text{Var}[X^{n}_{t}]$.
 			\item Using the Central Limit Theorem, determine the limiting distribution of $X^{n}_{t}$.
@@ -100,7 +147,8 @@
 		\]
 	\end{enumerate}
 	\textbf{Select Answers:}\\
-	1. (b) The Radon-Nikodym derivative is the ratio of the two probabilities;
+	3. \( p=\frac{1}{3} \) \\[1em]
+	5. (b) The Radon-Nikodym derivative is the ratio of the two probabilities;
 	\[	\frac{d\mathcal{Q}}{d\PR} = \begin{cases}
 		4/9 & \quad \text{if }HH\\
 		8/9 & \quad \text{if }HT\\
@@ -108,6 +156,6 @@
 		16/9 & \quad \text{if }TT\\
 	\end{cases}
 	\] 
-	2. (a) $X(t)\quad$ (d) $\mathbb{E}[X^{n}_{t}] = 0$, $\text{Var}[X^{n}_{t}] = \Delta \lfloor t/ \Delta\rfloor\approx t \text{ for $n$ large}\quad$ (e) $\mathcal{N}(0,t)\quad$ (e) Brownian Motion.\\\\
-	4. (d) $\mathcal{N}\left(e^{-\alpha t}x_{0} + \mu(1 - e^{-\alpha t}), \frac{\sigma^{2}}{2\alpha}(1 - e^{-2\alpha t})\right)$
+	6. (b) $\mathbb{E}[X^{n}_{t}] = 0$, $\text{Var}[X^{n}_{t}] = \Delta \lfloor t/ \Delta\rfloor\approx t \text{ for $n$ large}\quad$ (c) $\mathcal{N}(0,t)\quad$ (d) Brownian Motion.\\\\
+	8. (d) $\mathcal{N}\left(e^{-\alpha t}x_{0} + \mu(1 - e^{-\alpha t}), \frac{\sigma^{2}}{2\alpha}(1 - e^{-2\alpha t})\right)$
 \end{document}
