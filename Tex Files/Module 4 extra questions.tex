@@ -19,11 +19,12 @@
 
 \title{\textbf{ACTL3182 Module 3 and 4 Extra Questions: Radon-Nikodym Theorem, Martingales and It\^o's Lemma}}
 \author{Andrew Wu}
-\date{October 2020}
+\date{October 2021}
 
 
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\PR}{\mathbb{P}}
+\renewcommand{\Pr}{\mathbb{P}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Cov}{\operatorname{Cov}}
 \newcommand{\Var}{\operatorname{Var}}
@@ -65,7 +66,7 @@
 		where $Z_{k}$, $k=1,2,...n$ are iid with distribution 
 		\[	Z_{k} = \begin{cases}
 			+1 &  \quad \text{w.p. } 0.6 \\
-			-1 & \quad \text{w.p. } 0.4.
+			-1 & \quad \text{w.p. } 0.4,
 		\end{cases}
 		\]
 		and 
@@ -79,6 +80,14 @@
 			-1 & \quad \text{w.p. } \frac{1}{2}.
 		\end{cases}
 		\]
+		Recall that \( X:=(X_n)_{n=0,1,2\ldots} \) is a Markov process if for any \( n \)
+		\begin{align*}
+			\Pr(X_{n+1}| X_0, X_1, \ldots, X_n) = \Pr(X_{n+1} | X_n),
+		\end{align*}
+		or equivalently, for any nice (Borel-meausrable) function,
+		\begin{align*}
+			\E[f(X_{n+1})|\mathcal{F}_n] = \E[f(X_{n+1}) | X_n].
+		\end{align*}
 		\begin{enumerate}
 			\item Explain why \( X \) is a Markov process but not a martingale.
 			\item Explain why \( Y \) is a martingale but not a Markov process.
