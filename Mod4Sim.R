@@ -10,7 +10,7 @@ mu = 0.05; sigma = 0.01
 dt = Term/N
 dW = rnorm(N, mean = 0, sd = sqrt(dt))
 W = c(0, cumsum(dW))
-t = seq(from = 0, to = 1, by = dt)
+t = seq(from = 0, to = Term, by = dt)
 S = exp((mu - 0.5*sigma^2)*t + sigma*W)
 
 
