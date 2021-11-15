@@ -27,3 +27,5 @@ p <- ggplot(df_melted) +
 #Animate plot.
 p + theme(legend.position="right") + transition_reveal(t)
 
+
+

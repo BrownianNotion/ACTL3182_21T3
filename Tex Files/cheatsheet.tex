@@ -584,10 +584,10 @@
 	and \( X \) is called an \textbf{It\^{o} process}.
 	\subsubsection{It\^{o}'s Lemma}
 	It\^{o}'s Lemma tells us that smooth functions of It\^{o} processes are also It\^{o} processes as well as how they can be decomposed into a \( ds \) and \( dW_s \) integral term. \\\\
-	\noindent Specifically, if \( f(x), F(t, x) \) are deterministic functions with continuous (partial) derivatives up to the second order, then
+	\noindent Specifically, if \( f(x), F(t, x) \) are deterministic functions with continuous (partial) derivatives up to the second order and \( Y_t = f(X_t), Z_t = F(t, X_t) \), then
 	\begin{align*}
-		& df(X_t) = f'(X_t) \, dX_t + \frac{1}{2}f''(X_t) \, dX_t dX_t \\
-		& dF(t, X_t) = \frac{\partial F}{\partial t}(t, X_t)\, dt + \frac{\partial F}{\partial x}(t, X_t) \, dX_t + \frac{1}{2}\frac{\partial^2 F}{\partial x^2}(t, X_t) \, dX_t dX_t.
+		& dY_t = f'(X_t) \, dX_t + \frac{1}{2}f''(X_t) \, dX_t dX_t \\
+		& dZ_t = \frac{\partial F}{\partial t}(t, X_t)\, dt + \frac{\partial F}{\partial x}(t, X_t) \, dX_t + \frac{1}{2}\frac{\partial^2 F}{\partial x^2}(t, X_t) \, dX_t dX_t.
 	\end{align*}
 	These equations can be simplified using the following multiplication table:
 	\begin{center}

@@ -475,10 +475,10 @@ This is abbreviated as
 \[	\, dX_t = a_t \, dt + b_t \, dW_t, \qquad X(0) = x_0.\]
 	
 	\subsubsection{It\^{o}'s Lemma}
-	Let \( f(x), F(t, x) \) be deterministic functions with continuous (partial) derivatives up to the second order. Then, 
+	Specifically, if \( f(x), F(t, x) \) are deterministic functions with continuous (partial) derivatives up to the second order and \( Y_t = f(X_t), Z_t = F(t, X_t) \), then
 	\begin{align*}
-	& df(X_t) = f'(X_t) \, dX_t + \frac{1}{2}f''(X_t) \, dX_t dX_t \\
-	& dF(t, X_t) = \frac{\partial F}{\partial t}(t, X_t)\, dt + \frac{\partial F}{\partial x}(t, X_t) \, dX_t + \frac{1}{2}\frac{\partial^2 F}{\partial x^2}(t, X_t) \, dX_t dX_t.
+		& dY_t = f'(X_t) \, dX_t + \frac{1}{2}f''(X_t) \, dX_t dX_t \\
+		& dZ_t = \frac{\partial F}{\partial t}(t, X_t)\, dt + \frac{\partial F}{\partial x}(t, X_t) \, dX_t + \frac{1}{2}\frac{\partial^2 F}{\partial x^2}(t, X_t) \, dX_t dX_t.
 	\end{align*}
 	These equations can be simplified using the following multiplication table:
 	\begin{center}
