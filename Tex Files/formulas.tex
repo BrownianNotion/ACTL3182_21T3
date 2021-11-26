@@ -499,13 +499,15 @@ This is abbreviated as
 	\]
 	such that \( W^{Q} \), where
 	\[	W^{\Q}_t = W_t + \int_{0}^{t} \gamma_s\, ds,\]
-	is a \( \Q \)-Brownian Motion.
+	is a \( \Q \)-Brownian Motion. \\
+	
+	\noindent In particular, the equivalent martingale measure used for pricing is defined by setting \( \gamma = \frac{\mu - r}{\sigma} \).
 	
 	\subsection{Black-Scholes-Merton Model}
 	\subsubsection{Stock Process}
 	The stock process follows a Geometric Brownian Motion
 	\begin{align*}
-	&S_t = S_0 e^{\left(\mu - \frac{1}{2} \sigma^2\right)t + W_t}
+	&S_t = S_0 e^{\left(\mu - \frac{1}{2} \sigma^2\right)t + \sigma W_t}
 	%\exp\left[\left(\mu - \frac{1}{2}\sigma^2\right)t + \sigma W_t\right]
 	\\[4pt]
 	\iff &dS_t = \mu S_t dt + \sigma S_t dW_t

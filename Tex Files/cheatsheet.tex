@@ -613,7 +613,9 @@
 	\[	\zeta_T = \exp\left[-\int_{0}^{T}\gamma_s\, dW_s - \frac{1}{2}\int_{0}^{T}\gamma_s^2 \, ds\right]
 		\]
 	such that the process \( W^{Q} \)is a \( \Q \)-Brownian Motion, where
-	\[	W^{\Q}_t = W_t + \int_{0}^{t} \gamma_s\, ds.\]
+	\[	W^{\Q}_t = W_t + \int_{0}^{t} \gamma_s\, ds.\] 
+	
+	\noindent In particular, the equivalent martingale measure used for pricing is defined by setting \( \gamma = \frac{\mu - r}{\sigma} \).
 	\subsection{Pricing Framework}
 	\subsubsection{No arbitrage and the Risk-Neutral Measure}
 	The market has \textbf{no arbitrage} if there exists a \textbf{equivalent martingale measure} \( \Q \) under which \textbf{discounted stock processes are martingales}. \( \Q \) is also called the risk-neutral measure. \\
@@ -641,7 +643,7 @@
 		\item The underlying stock does not pay dividends.
 		\item The stock process follows a Geometric Brownian Motion
 		\begin{align*}
-			&S_t = S_0 e^{\left(\mu - \frac{1}{2} \sigma^2\right)t + W_t}
+			&S_t = S_0 e^{\left(\mu - \frac{1}{2} \sigma^2\right)t + \sigma W_t}
 			%\exp\left[\left(\mu - \frac{1}{2}\sigma^2\right)t + \sigma W_t\right]
 			\\[4pt]
 			\iff &dS_t = \mu S_t \, dt + \sigma S_t dW_t
