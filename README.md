@@ -6,7 +6,7 @@ Additional Tutorial Material for ACTL3182 2021 T3. Currently contains:
      
 <!-- end of the list -->
 * Lagrange Multipliers Revision Sheet
-* Extra Module 4 questions    
+* Extra Module 3 and 4 questions    
   
 <!-- end of the list -->
 * Module 4 simulation of Brownian Motion and Geometric Brownian Motion
